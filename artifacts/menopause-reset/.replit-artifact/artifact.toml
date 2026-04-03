@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "The Menopause-Proof Workday Reset"
+version = "1.0.0"
+id = "artifacts/menopause-reset"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18673
+
+[services.development]
+run = "pnpm --filter @workspace/menopause-reset run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/menopause-reset", "run", "build" ]
+publicDir = "artifacts/menopause-reset/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18673"
+BASE_PATH = "/"

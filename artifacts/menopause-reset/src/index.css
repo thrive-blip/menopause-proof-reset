@@ -1,0 +1,83 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --font-sans: var(--app-font-sans);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --background: 25 30% 95%;
+  --foreground: 0 0% 18%;
+  --border: 25 15% 90%;
+  --input: 25 15% 90%;
+  --ring: 248 21% 37%;
+  --card: 0 0% 97%;
+  --card-foreground: 0 0% 18%;
+  --primary: 248 21% 37%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 25 30% 92%;
+  --secondary-foreground: 0 0% 18%;
+  --muted: 25 20% 90%;
+  --muted-foreground: 0 0% 45%;
+  --accent: 25 30% 92%;
+  --accent-foreground: 0 0% 18%;
+  --destructive: 344 73% 55%;
+  --destructive-foreground: 0 0% 100%;
+
+  --app-font-sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --radius: 0.75rem;
+
+  --color-cta: #e63462;
+  --color-heading: #4a476a;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+}
+
+@keyframes pulse-gentle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.95); }
+}
+
+.pulse-gentle {
+  animation: pulse-gentle 2s ease-in-out infinite;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fade-in 0.4s ease-out forwards;
+}
