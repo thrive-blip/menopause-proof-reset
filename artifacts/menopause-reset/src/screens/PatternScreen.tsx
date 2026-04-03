@@ -13,6 +13,12 @@ const QUESTIONS = [
   "What is the one thing you most want to feel differently about your workday?",
 ];
 
+const QUESTION_HELPERS = [
+  "A few sentences is enough. Start where your workday begins, what fills most of it, and where it usually starts to feel harder or heavier.",
+  "Be as specific as you can. For example: therapist in private practice, operations consultant for small businesses, coach with online programs, practitioner with a client-based business, agency owner with a small team.",
+  "Try to name the specific part of the day, task, or pressure point that feels hardest right now. Name the thing that is costing you the most.",
+];
+
 interface PatternScreenProps {
   onSubmit: (pattern: string, answers: string[]) => void;
   onBack: () => void;
@@ -173,6 +179,9 @@ export default function PatternScreen({ onSubmit, onBack }: PatternScreenProps) 
               </p>
               <p className="text-base font-medium leading-snug" style={{ color: "#4a476a" }}>
                 {QUESTIONS[step as number]}
+              </p>
+              <p className="text-sm leading-relaxed" style={{ color: "#888" }}>
+                {QUESTION_HELPERS[step as number]}
               </p>
               <textarea
                 value={answers[step as number]}
