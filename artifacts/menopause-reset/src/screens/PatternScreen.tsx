@@ -13,10 +13,12 @@ const QUESTIONS = [
   "What is the one thing you most want to feel differently about your workday?",
 ];
 
-const QUESTION_HELPERS = [
-  "A few sentences is enough. Start where your workday begins, what fills most of it, and where it usually starts to feel harder or heavier.",
-  "Be as specific as you can. For example: therapist in private practice, operations consultant for small businesses, coach with online programs, practitioner with a client-based business, agency owner with a small team.",
-  "Try to name the specific part of the day, task, or pressure point that feels hardest right now. Name the thing that is costing you the most.",
+const QUESTION_HELPER = "The more specific you are, the more specific your reset will be.";
+
+const QUESTION_PLACEHOLDERS = [
+  "Start where your workday begins, what fills most of it, and where it usually starts to feel harder or heavier.",
+  "Be as specific as you can — for example: therapist in private practice, coach with online programs, consultant with a small team.",
+  "Name the specific part of the day, task, or pressure point that feels hardest right now.",
 ];
 
 interface PatternScreenProps {
@@ -181,13 +183,13 @@ export default function PatternScreen({ onSubmit, onBack }: PatternScreenProps) 
                 {QUESTIONS[step as number]}
               </p>
               <p className="text-sm leading-relaxed" style={{ color: "#888" }}>
-                {QUESTION_HELPERS[step as number]}
+                {QUESTION_HELPER}
               </p>
               <textarea
                 value={answers[step as number]}
                 onChange={(e) => updateAnswer(step as number, e.target.value)}
                 rows={5}
-                placeholder="Take your time..."
+                placeholder={QUESTION_PLACEHOLDERS[step as number]}
                 className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all resize-none focus:ring-2"
                 style={{
                   backgroundColor: "#fff",
