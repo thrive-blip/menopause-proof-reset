@@ -8,9 +8,9 @@ const PATTERNS = [
 ];
 
 const QUESTIONS = [
-  "Walk me through the rough shape of your workday, including where it starts to feel hard.",
-  "What kind of business or professional role are you in?",
-  "What is the one thing you most want to feel differently about your workday?",
+  "Walk me through the rough shape of your workday, including where it starts to feel hard. The more specific you are, the better.",
+  "What kind of business or professional role are you in? The more specific you are, the better.",
+  "What's making your workday feel hardest right now? The more specific you are, the better.",
 ];
 
 const QUESTION_HELPER = "The more specific you are, the more specific your reset will be.";
@@ -181,9 +181,6 @@ export default function PatternScreen({ onSubmit, onBack }: PatternScreenProps) 
               </p>
               <p className="text-base font-medium leading-snug" style={{ color: "#4a476a" }}>
                 {QUESTIONS[step as number]}
-              </p>
-              <p className="text-sm leading-relaxed" style={{ color: "#888" }}>
-                {QUESTION_HELPER}
               </p>
               <textarea
                 value={answers[step as number]}
