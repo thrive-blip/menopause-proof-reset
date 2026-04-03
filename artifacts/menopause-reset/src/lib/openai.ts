@@ -82,5 +82,6 @@ export async function callOpenAI(
     choices: Array<{ message: { content: string } }>;
   };
   const content = data.choices[0]?.message?.content ?? "{}";
+  console.log("Raw API response content:", content);
   return parseResult(content);
 }
