@@ -77,7 +77,7 @@ function App() {
     <div className="min-h-screen" style={{ backgroundColor: "#f5efea" }}>
       {screen === "intro" && <IntroScreen onStart={handleStart} />}
       {screen === "apikey" && <ApiKeyScreen onContinue={handleApiKeyContinue} />}
-      {screen === "pattern" && <PatternScreen onSubmit={handlePatternSubmit} />}
+      {screen === "pattern" && <PatternScreen onSubmit={handlePatternSubmit} onBack={() => setScreen("intro")} />}
       {screen === "loading" && <LoadingScreen />}
       {screen === "results" && (
         <ResultsScreen

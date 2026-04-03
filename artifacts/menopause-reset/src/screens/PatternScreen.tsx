@@ -15,9 +15,37 @@ const QUESTIONS = [
 
 interface PatternScreenProps {
   onSubmit: (pattern: string, answers: string[]) => void;
+  onBack: () => void;
 }
 
-export default function PatternScreen({ onSubmit }: PatternScreenProps) {
+function BackButton({ onClick }: { onClick: () => void }) {
+  return (
+    <button
+      onClick={onClick}
+      className="flex items-center gap-1.5 text-sm transition-opacity duration-200 hover:opacity-70"
+      style={{ color: "#4a476a" }}
+    >
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M10 12L6 8L10 4"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+      Back
+    </button>
+  );
+}
+
+export default function PatternScreen({ onSubmit, onBack }: PatternScreenProps) {
   const [step, setStep] = useState<"pattern" | number>("pattern");
   const [selectedPattern, setSelectedPattern] = useState("");
   const [answers, setAnswers] = useState<string[]>(["", "", ""]);
@@ -45,6 +73,17 @@ export default function PatternScreen({ onSubmit }: PatternScreenProps) {
     }
   };
 
+  const handleBack = () => {
+    setError("");
+    if (step === "pattern") {
+      onBack();
+    } else if (step === 0) {
+      setStep("pattern");
+    } else {
+      setStep((step as number) - 1);
+    }
+  };
+
   const updateAnswer = (index: number, value: string) => {
     const updated = [...answers];
     updated[index] = value;
@@ -58,16 +97,19 @@ export default function PatternScreen({ onSubmit }: PatternScreenProps) {
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-16 fade-in">
       <div className="max-w-lg w-full space-y-6">
-        <div className="flex gap-2 mb-2">
-          {Array.from({ length: progressSteps }).map((_, i) => (
-            <div
-              key={i}
-              className="h-1 flex-1 rounded-full transition-all duration-300"
-              style={{
-                backgroundColor: i <= currentStep ? "#4a476a" : "#e9e9eb",
-              }}
-            />
-          ))}
+        <div className="flex items-center gap-4">
+          <BackButton onClick={handleBack} />
+          <div className="flex gap-2 flex-1">
+            {Array.from({ length: progressSteps }).map((_, i) => (
+              <div
+                key={i}
+                className="h-1 flex-1 rounded-full transition-all duration-300"
+                style={{
+                  backgroundColor: i <= currentStep ? "#4a476a" : "#e9e9eb",
+                }}
+              />
+            ))}
+          </div>
         </div>
 
         {step === "pattern" && (
