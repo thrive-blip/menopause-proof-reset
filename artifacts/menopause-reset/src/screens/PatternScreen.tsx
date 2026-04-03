@@ -16,9 +16,9 @@ const QUESTIONS = [
 const QUESTION_HELPER = "The more specific you are, the more specific your reset will be.";
 
 const QUESTION_PLACEHOLDERS = [
-  "Start where your workday begins, what fills most of it, and where it usually starts to feel harder or heavier.",
-  "Be as specific as you can — for example: therapist in private practice, coach with online programs, consultant with a small team.",
-  "Name the specific part of the day, task, or pressure point that feels hardest right now.",
+  "Take your time... Start where your workday begins, what fills most of it, and where it usually starts to feel harder or heavier.",
+  "Take your time... Be as specific as you can — for example: therapist in private practice, coach with online programs, consultant with a small team.",
+  "Take your time... Name the specific part of the day or task that feels hardest right now. Name the thing that is costing you the most.",
 ];
 
 interface PatternScreenProps {
