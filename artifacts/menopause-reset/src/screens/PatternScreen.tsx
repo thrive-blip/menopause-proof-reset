@@ -8,52 +8,16 @@ const PATTERNS = [
 ];
 
 const QUESTIONS = [
-  "Walk me through the rough shape of your workday, including where it starts to feel hard. The more specific you are, the better.",
-  "What kind of business or professional role are you in? The more specific you are, the better.",
-  "What's making your workday feel hardest right now? The more specific you are, the better.",
-];
-
-const QUESTION_HELPER = "The more specific you are, the more specific your reset will be.";
-
-const QUESTION_PLACEHOLDERS = [
-  "Take your time... Start where your workday begins, what fills most of it, and where it usually starts to feel harder or heavier.",
-  "Take your time... Be as specific as you can — for example: therapist in private practice, coach with online programs, consultant with a small team.",
-  "Take your time... Name the specific part of the day or task that feels hardest right now. Name the thing that is costing you the most.",
+  "Walk me through the rough shape of your workday, including where it starts to feel hard.",
+  "What kind of business or professional role are you in?",
+  "What is the one thing you most want to feel differently about your workday?",
 ];
 
 interface PatternScreenProps {
   onSubmit: (pattern: string, answers: string[]) => void;
-  onBack: () => void;
 }
 
-function BackButton({ onClick }: { onClick: () => void }) {
-  return (
-    <button
-      onClick={onClick}
-      className="flex items-center gap-1.5 text-sm transition-opacity duration-200 hover:opacity-70"
-      style={{ color: "#4a476a" }}
-    >
-      <svg
-        width="16"
-        height="16"
-        viewBox="0 0 16 16"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M10 12L6 8L10 4"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-      Back
-    </button>
-  );
-}
-
-export default function PatternScreen({ onSubmit, onBack }: PatternScreenProps) {
+export default function PatternScreen({ onSubmit }: PatternScreenProps) {
   const [step, setStep] = useState<"pattern" | number>("pattern");
   const [selectedPattern, setSelectedPattern] = useState("");
   const [answers, setAnswers] = useState<string[]>(["", "", ""]);
@@ -81,17 +45,6 @@ export default function PatternScreen({ onSubmit, onBack }: PatternScreenProps) 
     }
   };
 
-  const handleBack = () => {
-    setError("");
-    if (step === "pattern") {
-      onBack();
-    } else if (step === 0) {
-      setStep("pattern");
-    } else {
-      setStep((step as number) - 1);
-    }
-  };
-
   const updateAnswer = (index: number, value: string) => {
     const updated = [...answers];
     updated[index] = value;
@@ -105,19 +58,16 @@ export default function PatternScreen({ onSubmit, onBack }: PatternScreenProps) 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-16 fade-in">
       <div className="max-w-lg w-full space-y-6">
-        <div className="flex items-center gap-4">
-          <BackButton onClick={handleBack} />
-          <div className="flex gap-2 flex-1">
-            {Array.from({ length: progressSteps }).map((_, i) => (
-              <div
-                key={i}
-                className="h-1 flex-1 rounded-full transition-all duration-300"
-                style={{
-                  backgroundColor: i <= currentStep ? "#4a476a" : "#e9e9eb",
-                }}
-              />
-            ))}
-          </div>
+        <div className="flex gap-2 mb-2">
+          {Array.from({ length: progressSteps }).map((_, i) => (
+            <div
+              key={i}
+              className="h-1 flex-1 rounded-full transition-all duration-300"
+              style={{
+                backgroundColor: i <= currentStep ? "#4a476a" : "#e9e9eb",
+              }}
+            />
+          ))}
         </div>
 
         {step === "pattern" && (
@@ -186,7 +136,7 @@ export default function PatternScreen({ onSubmit, onBack }: PatternScreenProps) 
                 value={answers[step as number]}
                 onChange={(e) => updateAnswer(step as number, e.target.value)}
                 rows={5}
-                placeholder={QUESTION_PLACEHOLDERS[step as number]}
+                placeholder="Take your time..."
                 className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all resize-none focus:ring-2"
                 style={{
                   backgroundColor: "#fff",
