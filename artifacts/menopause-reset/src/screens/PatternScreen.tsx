@@ -8,9 +8,15 @@ const PATTERNS = [
 ];
 
 const QUESTIONS = [
-  "Walk me through the rough shape of your workday, including where it starts to feel hard.",
-  "What kind of business or professional role are you in?",
-  "What is the one thing you most want to feel differently about your workday?",
+  "Walk me through the rough shape of your workday, including where it starts to feel hard. The more specific you are, the better.",
+  "What kind of business or professional role are you in? The more specific you are, the better.",
+  "What’s making your workday feel hardest right now? The more specific you are, the better.",
+];
+
+const PLACEHOLDERS = [
+  "Take your time... Start where your workday begins, what fills most of it, and where it usually starts to feel harder or heavier.",
+  "Take your time... Be as specific as you can — for example: therapist in private practice, coach with online programs, consultant with a small team.",
+  "Take your time... Name the specific part of the day, task, or pressure point that feels hardest right now.",
 ];
 
 interface PatternScreenProps {
@@ -34,7 +40,7 @@ export default function PatternScreen({ onSubmit }: PatternScreenProps) {
 
   const handleAnswerNext = (index: number) => {
     if (!answers[index].trim()) {
-      setError("Please share something before continuing.");
+      setError("Please answer this question before moving on.");
       return;
     }
     setError("");
@@ -43,6 +49,16 @@ export default function PatternScreen({ onSubmit }: PatternScreenProps) {
     } else {
       onSubmit(selectedPattern, answers);
     }
+  };
+
+  const handleBack = () => {
+    setError("");
+    if (step === "pattern") return;
+    if (step === 0) {
+      setStep("pattern");
+      return;
+    }
+    setStep((step as number) - 1);
   };
 
   const updateAnswer = (index: number, value: string) => {
@@ -58,106 +74,149 @@ export default function PatternScreen({ onSubmit }: PatternScreenProps) {
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-16 fade-in">
       <div className="max-w-lg w-full space-y-6">
-        <div className="flex gap-2 mb-2">
-          {Array.from({ length: progressSteps }).map((_, i) => (
-            <div
-              key={i}
-              className="h-1 flex-1 rounded-full transition-all duration-300"
-              style={{
-                backgroundColor: i <= currentStep ? "#4a476a" : "#e9e9eb",
-              }}
-            />
-          ))}
-        </div>
-
-        {step === "pattern" && (
-          <div className="space-y-6 fade-in">
-            <div
-              className="rounded-2xl p-6 space-y-4"
-              style={{ backgroundColor: "#f8f8f8", border: "1px solid #e9e9eb" }}
-            >
-              <label
-                className="block text-base font-medium"
+        {typeof step === "number" ? (
+          <>
+            <div className="flex items-center gap-4 mb-2">
+              <button
+                type="button"
+                onClick={handleBack}
+                className="text-sm font-medium transition-opacity hover:opacity-80 shrink-0"
                 style={{ color: "#4a476a" }}
               >
-                The quiz identified you as:
-              </label>
-              <select
-                value={selectedPattern}
-                onChange={(e) => {
-                  setSelectedPattern(e.target.value);
-                  setError("");
-                }}
-                className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all appearance-none cursor-pointer"
+                ← Back
+              </button>
+
+              <div className="flex gap-2 flex-1">
+                {Array.from({ length: progressSteps }).map((_, i) => (
+                  <div
+                    key={i}
+                    className="h-1 flex-1 rounded-full transition-all duration-300"
+                    style={{
+                      backgroundColor: i <= currentStep ? "#4a476a" : "#e9e9eb",
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-6 fade-in" key={step}>
+              <div
+                className="rounded-2xl p-6 space-y-4"
+                style={{ backgroundColor: "#f8f8f8", border: "1px solid #e9e9eb" }}
+              >
+                <p
+                  className="text-sm font-medium uppercase tracking-wide"
+                  style={{ color: "#888" }}
+                >
+                  Question {(step as number) + 1} of {QUESTIONS.length}
+                </p>
+
+                <p
+                  className="text-base font-medium leading-snug"
+                  style={{ color: "#4a476a" }}
+                >
+                  {QUESTIONS[step as number]}
+                </p>
+
+                <textarea
+                  value={answers[step as number]}
+                  onChange={(e) => updateAnswer(step as number, e.target.value)}
+                  rows={5}
+                  placeholder={PLACEHOLDERS[step as number]}
+                  className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all resize-none focus:ring-2"
+                  style={{
+                    backgroundColor: "#fff",
+                    border: "1px solid #e9e9eb",
+                    color: "#2d2d2d",
+                  }}
+                />
+
+                {error && (
+                  <p className="text-sm" style={{ color: "#e63462" }}>
+                    {error}
+                  </p>
+                )}
+              </div>
+
+              <button
+                onClick={() => handleAnswerNext(step as number)}
+                className="w-full py-4 px-8 rounded-full text-white font-semibold text-base transition-all duration-200 hover:opacity-90 active:scale-95"
                 style={{
-                  backgroundColor: "#fff",
-                  border: "1px solid #e9e9eb",
-                  color: selectedPattern ? "#2d2d2d" : "#888",
+                  backgroundColor:
+                    (step as number) === QUESTIONS.length - 1 ? "#e63462" : "#4a476a",
                 }}
               >
-                <option value="" disabled>
-                  Select your pattern...
-                </option>
-                {PATTERNS.map((p) => (
-                  <option key={p} value={p} style={{ color: "#2d2d2d" }}>
-                    {p}
-                  </option>
-                ))}
-              </select>
-              {error && (
-                <p className="text-sm" style={{ color: "#e63462" }}>
-                  {error}
-                </p>
-              )}
+                {(step as number) === QUESTIONS.length - 1
+                  ? "Show Me My Reset"
+                  : "Next"}
+              </button>
             </div>
-            <button
-              onClick={handlePatternContinue}
-              className="w-full py-4 px-8 rounded-full text-white font-semibold text-base transition-all duration-200 hover:opacity-90 active:scale-95"
-              style={{ backgroundColor: "#4a476a" }}
-            >
-              Next
-            </button>
-          </div>
-        )}
+          </>
+        ) : (
+          <>
+            <div className="flex gap-2 mb-2">
+              {Array.from({ length: progressSteps }).map((_, i) => (
+                <div
+                  key={i}
+                  className="h-1 flex-1 rounded-full transition-all duration-300"
+                  style={{
+                    backgroundColor: i <= currentStep ? "#4a476a" : "#e9e9eb",
+                  }}
+                />
+              ))}
+            </div>
 
-        {typeof step === "number" && (
-          <div className="space-y-6 fade-in" key={step}>
-            <div
-              className="rounded-2xl p-6 space-y-4"
-              style={{ backgroundColor: "#f8f8f8", border: "1px solid #e9e9eb" }}
-            >
-              <p className="text-sm font-medium uppercase tracking-wide" style={{ color: "#888" }}>
-                Question {(step as number) + 1} of {QUESTIONS.length}
-              </p>
-              <p className="text-base font-medium leading-snug" style={{ color: "#4a476a" }}>
-                {QUESTIONS[step as number]}
-              </p>
-              <textarea
-                value={answers[step as number]}
-                onChange={(e) => updateAnswer(step as number, e.target.value)}
-                rows={5}
-                placeholder="Take your time..."
-                className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all resize-none focus:ring-2"
-                style={{
-                  backgroundColor: "#fff",
-                  border: "1px solid #e9e9eb",
-                  color: "#2d2d2d",
-                }}
-              />
-              {error && (
-                <p className="text-sm" style={{ color: "#e63462" }}>
-                  {error}
-                </p>
-              )}
+            <div className="space-y-6 fade-in">
+              <div
+                className="rounded-2xl p-6 space-y-4"
+                style={{ backgroundColor: "#f8f8f8", border: "1px solid #e9e9eb" }}
+              >
+                <label
+                  className="block text-base font-medium"
+                  style={{ color: "#4a476a" }}
+                >
+                  The quiz identified you as:
+                </label>
+
+                <select
+                  value={selectedPattern}
+                  onChange={(e) => {
+                    setSelectedPattern(e.target.value);
+                    setError("");
+                  }}
+                  className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all appearance-none cursor-pointer"
+                  style={{
+                    backgroundColor: "#fff",
+                    border: "1px solid #e9e9eb",
+                    color: selectedPattern ? "#2d2d2d" : "#888",
+                  }}
+                >
+                  <option value="" disabled>
+                    Select your pattern...
+                  </option>
+                  {PATTERNS.map((p) => (
+                    <option key={p} value={p} style={{ color: "#2d2d2d" }}>
+                      {p}
+                    </option>
+                  ))}
+                </select>
+
+                {error && (
+                  <p className="text-sm" style={{ color: "#e63462" }}>
+                    {error}
+                  </p>
+                )}
+              </div>
+
+              <button
+                onClick={handlePatternContinue}
+                className="w-full py-4 px-8 rounded-full text-white font-semibold text-base transition-all duration-200 hover:opacity-90 active:scale-95"
+                style={{ backgroundColor: "#4a476a" }}
+              >
+                Next
+              </button>
             </div>
-            <button
-              onClick={() => handleAnswerNext(step as number)}
-              className="w-full py-4 px-8 rounded-full text-white font-semibold text-base transition-all duration-200 hover:opacity-90 active:scale-95"
-              style={{ backgroundColor: (step as number) === QUESTIONS.length - 1 ? "#e63462" : "#4a476a" }}
-            >
-              {(step as number) === QUESTIONS.length - 1 ? "Show Me My Reset" : "Next"}
-            </button>
-          </div>
+          </>
         )}
       </div>
     </div>
