@@ -8,15 +8,15 @@ const PATTERNS = [
 ];
 
 const QUESTIONS = [
-  "Walk me through the rough shape of your workday, including where it starts to feel hard. The more specific you are, the better.",
+  "Walk me through what your workday looks like in detail — when it starts, what fills it, and when it ends. The more specific you are, the better.",
   "What kind of business or professional role are you in? The more specific you are, the better.",
   "What’s making your workday feel hardest right now? The more specific you are, the better.",
 ];
 
 const PLACEHOLDERS = [
-  "Take your time... Start where your workday begins, what fills most of it, and where it usually starts to feel harder or heavier.",
-  "Take your time... Be as specific as you can — for example: therapist in private practice, coach with online programs, consultant with a small team.",
-  "Take your time... Name the specific part of the day, task, or pressure point that feels hardest right now.",
+  "Take your time... Walk me through what your day actually looks like — what time it starts, what fills most of it (client calls, content, emails, admin, team, planning), and roughly how long you work. The more specific you are about what your day actually contains, the more useful your reset will be.",
+  `Take your time... Be as specific as you can — for example: "I'm a consultant with a small team of four. We do brand strategy and messaging for wellness businesses." Or: "I'm a coach and I run a small online education company. I have a VA and I create courses and run group programs." Or: "I'm a therapist in private practice. I see clients four days a week and run a small group program for newly divorced women."`,
+  "Take your time... What is actually happening when your workday feels hardest? Name the specific moment, task, or part of the day — not just the feeling. The more concrete you can be, the sharper your reset.",
 ];
 
 interface PatternScreenProps {

@@ -96,9 +96,13 @@ export default function ResultsScreen({
               borderLeft: "4px solid #4a476a",
             }}
           >
-            <p className="text-base leading-relaxed" style={{ color: "#2d2d2d" }}>
-              {result.what_i_see}
-            </p>
+            <div className="space-y-3">
+              {result.what_i_see.split("\n").filter(line => line.trim().length > 0).map((line, i) => (
+                <p key={i} className="text-base leading-relaxed" style={{ color: "#2d2d2d" }}>
+                  {line}
+                </p>
+              ))}
+            </div>
           </div>
           <button
             onClick={onRetry}
