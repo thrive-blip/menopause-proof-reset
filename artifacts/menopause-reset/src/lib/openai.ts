@@ -276,9 +276,10 @@ Each section should feel specific to the user's pattern and answers.
 - feel recognizably true and specific
 
 “The mismatch” should:
-- briefly reference perimenopause or menopause as context
+- name the specific biological mechanism at play — for example, progesterone decline reducing the body's ability to wind down and recover, estrogen shifts affecting cognitive sharpness and energy regulation, or cortisol dysregulation making the body slower to settle after demand
 - then quickly name the deeper work-pattern problem
 - focus on what the current day is asking from a system with less margin
+- do not say "natural wind-down abilities shift" or other vague references — name the actual hormone or mechanism
 
 “What this is costing you right now” should:
 - be concrete, not abstract
@@ -407,7 +408,7 @@ Q1: I usually start the day checking messages and email, then I have client call
 Q2: I'm a counsellor with a private practice.
 Q3: I feel like I'm always reacting and there's never enough space to actually think or get ahead.
 What I'm seeing: Your day starts with people and intensity, then asks you to do your most focused work after you are already spent. By the time the afternoon arrives, you are not starting fresh. You are trying to think clearly on a system that has already been running hard for hours. The afternoon work is not harder than it used to be. It is just landing on a body that has much less left to give.
-The mismatch: Perimenopause may be part of why your energy feels less steady right now. But the bigger issue is that your workday still expects you to go straight from client calls into admin, decisions, and content without any real recovery in between. What used to feel manageable is now tipping into too much, much faster.
+The mismatch: In perimenopause and menopause progesterone declines over time and that reduces the body's ability to recover between intensive blocks. What used to feel manageable now tips into too much faster because your system has less buffer between one demand and the next. The bigger issue is that your workday still expects you to go straight from client calls into admin and decisions without any real recovery in between. What used to feel manageable is now tipping into too much, much faster.
 What this is costing you right now:
 - Your afternoons are becoming your least useful hours, even though that is when all your catch-up work lands
 - You carry a constant feeling of being behind, even on days when you have worked hard the whole time
@@ -429,7 +430,7 @@ Q1: My day is fairly flexible, but work bleeds into everything. I check messages
 Q2: I'm a coach and I run online programs.
 Q3: I can't switch off and I always feel like I should be checking on something.
 What I'm seeing: Your workday does not have real edges right now. It starts before your day begins and keeps running quietly long after it should be over. But here is what may not be fully visible yet: the hours after work may look like rest from the outside, while your body is still scanning, waiting, and bracing. That is not recovery. That is just a quieter version of the same state you were in all day.
-The mismatch: In perimenopause and menopause, the ability to wind down naturally starts to shift. But the bigger issue is that your pattern gives your body no clear moment to stop. Right now, at the very time you most need real recovery, your system is still half-on and waiting for the next thing to land.
+The mismatch: Progesterone is one of the hormones that signals the body it is safe to settle. As it declines in perimenopause and menopause, that signal gets quieter. The body stays in a low-level alert state longer, even when work has technically stopped. This means the ability to wind down naturally starts to shift. But the bigger issue is that your pattern gives your body no clear moment to stop. Right now, at the very time you most need real recovery, your system is still half-on and waiting for the next thing to land.
 What this is costing you right now:
 - You are getting far less recovery from your evenings than the hours would suggest
 - Work is taking up more mental space than the actual time you spend on it
@@ -451,7 +452,7 @@ Q1: I start with email and Slack, then I'm jumping between team questions, clien
 Q2: I run a small online education business.
 Q3: Too many decisions and too many moving parts. I feel mentally maxed out before I get to the important work.
 What I'm seeing: Your day is using up your best thinking before your real work has a chance to begin. By the time you get to what actually matters, your brain has already worked through a full morning of messages, switching, and small decisions. You are not running out of hours. You are running out of mental fuel well before the day is done.
-The mismatch: In perimenopause and menopause, the brain gets worn down by too many decisions much faster than it used to. But the bigger issue is that your workday still assumes you can handle a constant stream of switching and deciding without an early cost. Right now, that load is burning through your best thinking in the first half of the day, leaving the important work for when you have the least left.
+The mismatch: Estrogen supports cognitive sharpness and the brain's ability to filter and switch efficiently. As it fluctuates in perimenopause and declines in menopause, decision load lands harder and earlier. The bigger issue is that your workday still assumes you can handle a constant stream of switching and deciding without an early cost. Right now, that load is burning through your best thinking in the first half of the day, leaving the important work for when you have the least left.
 What this is costing you right now:
 - Your clearest thinking is being spent on reactive work before you have saved any of it for yourself
 - The work that matters most keeps getting pushed into the hours when your brain has the least to give
@@ -473,7 +474,7 @@ Q1: My days look normal from the outside. I have meetings, follow-up, deliverabl
 Q2: I'm a consultant.
 Q3: It takes so much energy to stay sharp and not let people see that things feel harder for me than they used to.
 What I'm seeing: From the outside, your day still looks fine. But a lot of your energy is going into the effort around the work, not just the work itself. Preparing more. Checking more. Making sure nothing slips or shows. That hidden effort is real. And it is wearing you out just as much as the actual work is.
-The mismatch: In perimenopause and menopause, your body has less room to carry that kind of hidden load than it used to. But the bigger issue is that your work pattern still expects you to absorb all of it without showing the strain. The cost of keeping it together has quietly gone up. Nothing in your day reflects that yet.
+The mismatch: In perimenopause and menopause, the stress hormone cortisol that helps your body buffer pressure starts to be less effective. This means the body has less room to carry that kind of hidden load than it used to. But the bigger issue is that your work pattern still expects you to absorb all of it without showing the strain. The cost of keeping it together has quietly gone up. Nothing in your day reflects that yet.
 What this is costing you right now:
 - Work is taking longer because of the extra effort wrapped around every task
 - You are spending real energy on looking steady, not just on doing the work
