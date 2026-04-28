@@ -32,7 +32,7 @@ export default function IntroScreen({ onStart }: IntroScreenProps) {
 
         <div className="space-y-2">
           <p className="text-xs leading-relaxed" style={{ color: "#888888" }}>
-            Your answers are used only to generate your reset. They are not stored or shared. This tool uses OpenAI to process your responses privately.
+            Note, your answers are used only to generate your reset. They are not stored, saved, or shared.
           </p>
           <button
             onClick={() => setShowPrivacy(!showPrivacy)}
