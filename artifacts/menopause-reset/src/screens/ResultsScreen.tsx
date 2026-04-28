@@ -259,22 +259,22 @@ export default function ResultsScreen({
         </SectionCard>
 
         <p
-          className="text-sm text-center pt-2 pb-4 italic"
+          className="no-print text-sm text-center pt-2 pb-4 italic"
           style={{ color: "#888" }}
         >
           You do not need to do all of this at once. Start with the first move.
         </p>
 
         <button
-          onClick={copyText}
-          className="w-full py-4 px-8 rounded-full text-white font-semibold text-base transition-all duration-200 hover:opacity-90 active:scale-95"
+          onClick={() => window.print()}
+          className="no-print w-full py-4 px-8 rounded-full text-white font-semibold text-base transition-all duration-200 hover:opacity-90 active:scale-95"
           style={{ backgroundColor: "#4a476a" }}
         >
-          {copied ? "Copied!" : "Copy My Reset"}
+          Save My Reset
         </button>
 
         <div
-          className="rounded-2xl p-6 mt-6 space-y-4"
+          className="no-print rounded-2xl p-6 mt-6 space-y-4"
           style={{ backgroundColor: "#f8f8f8", border: "1px solid #e9e9eb" }}
         >
           <h3 className="text-base font-semibold" style={{ color: "#4a476a" }}>
