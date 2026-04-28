@@ -267,7 +267,9 @@ export default function ResultsScreen({
 
         <button
           onClick={() => window.print()}
-          className="no-print w-full py-4 px-8 rounded-full text-white font-semibold text-base transition-all duration-200 hover:opacity-90 active:scale-95"
+          onMouseEnter={e => (e.currentTarget.style.backgroundColor = "#e63462")}
+          onMouseLeave={e => (e.currentTarget.style.backgroundColor = "#4a476a")}
+          className="no-print w-full py-4 px-8 rounded-full text-white font-semibold text-base transition-all duration-200 active:scale-95"
           style={{ backgroundColor: "#4a476a" }}
         >
           Save My Reset
