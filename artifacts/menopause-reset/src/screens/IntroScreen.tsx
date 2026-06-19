@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Eyebrow, PrimaryButton, BRAND } from "@/components/flow";
 
 interface IntroScreenProps {
   onStart: () => void;
@@ -6,67 +7,42 @@ interface IntroScreenProps {
 
 export default function IntroScreen({ onStart }: IntroScreenProps) {
   const [showPrivacy, setShowPrivacy] = useState(false);
-
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-16 fade-in">
-      <div className="max-w-lg w-full text-center space-y-8">
+    <div className="min-h-screen flex items-center justify-center px-4 py-16 fade-in" style={{ background: "#fff" }}>
+      <div className="max-w-xl w-full text-center space-y-7">
         <div className="space-y-4">
-          <h1
-            className="text-3xl md:text-4xl font-semibold leading-tight"
-            style={{ color: "#4a476a" }}
-          >
-            The Menopause-Proof Workday Reset
+          <Eyebrow>The Menopause-Proof Workday Reset</Eyebrow>
+          <h1 className="font-display text-4xl md:text-5xl" style={{ color: BRAND.teal, fontWeight: 600, lineHeight: 1.1 }}>
+            Why your workday suddenly feels so much harder
           </h1>
-          <p className="text-base md:text-lg leading-relaxed" style={{ color: "#2d2d2d" }}>
-            You have already done the hard part — figuring out your pattern. Now let us look at what it is actually doing to your workday, why it feels so much harder than it used to, and what one shift could start to change that. This takes about 3 minutes.
+          <p className="text-base md:text-lg" style={{ color: BRAND.ink, lineHeight: 1.7 }}>
+            A short set of questions, then a few about how you actually work. In about five minutes you will have a clear picture of the pattern behind your days, and a personalized reset you can start tomorrow.
+          </p>
+          <p className="text-sm" style={{ color: BRAND.muted }}>
+            Made for women in business navigating perimenopause and menopause.
           </p>
         </div>
 
-        <button
-          onClick={onStart}
-          className="w-full max-w-xs mx-auto block py-4 px-8 rounded-full text-white font-semibold text-base transition-all duration-200 hover:opacity-90 active:scale-95"
-          style={{ backgroundColor: "#e63462" }}
-        >
-          Show Me My Reset
-        </button>
+        <div className="max-w-xs mx-auto">
+          <PrimaryButton onClick={onStart}>Begin the audit</PrimaryButton>
+        </div>
 
         <div className="space-y-2">
-          <p className="text-xs leading-relaxed" style={{ color: "#888888" }}>
-            Note, your answers are used only to generate your reset. They are not stored, saved, or shared.
+          <p className="text-xs" style={{ color: BRAND.muted, lineHeight: 1.6 }}>
+            Your answers are used only to create your reset. They are never stored, saved, or shared.
           </p>
-          <button
-            onClick={() => setShowPrivacy(!showPrivacy)}
-            className="text-xs underline"
-            style={{ color: "#888888" }}
-          >
+          <button onClick={() => setShowPrivacy(!showPrivacy)} className="text-xs underline" style={{ color: BRAND.muted }}>
             Privacy notice
           </button>
         </div>
 
         {showPrivacy && (
-          <div
-            className="text-left text-xs leading-relaxed rounded-xl p-4 space-y-3"
-            style={{ backgroundColor: "#f5f4f8", color: "#2d2d2d" }}
-          >
-            <p className="font-semibold">Privacy Notice</p>
-            <p>
-              The Menopause-Proof Workday Reset Tool is available exclusively to members of The Menopause-Proof Workday Reset course.
-            </p>
-            <p>
-              When you use this tool, your answers to the three questions are sent securely to OpenAI to generate your personalised reset. Your answers are not stored by this tool after your reset is generated. They are not used for marketing, shared with third parties, or retained in any database.
-            </p>
-            <p>
-              OpenAI processes your input in accordance with their privacy policy, which you can review at openai.com/privacy
-            </p>
-            <p>
-              This tool does not collect your name, email address, or any identifying information. It is designed to be used anonymously.
-            </p>
-            <p>
-              If you have any questions about how your information is handled, please contact support@masteringmenopausemethod.com
-            </p>
+          <div className="text-left text-xs rounded-xl p-4 space-y-3" style={{ background: BRAND.mist, color: BRAND.ink, lineHeight: 1.6 }}>
+            <p className="font-semibold">Privacy notice</p>
+            <p>This tool creates your reset in a single session. Your answers are sent securely to generate your personalized result, and are not stored, saved to any database, used for marketing, or shared with third parties.</p>
+            <p>Nothing leaves your session once your reset is created. If you have any questions, contact support@masteringmenopausemethod.com</p>
           </div>
         )}
-
       </div>
     </div>
   );

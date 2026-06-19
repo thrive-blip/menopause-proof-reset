@@ -1,147 +1,102 @@
 import { useState } from "react";
 import IntroScreen from "@/screens/IntroScreen";
-import PatternScreen from "@/screens/PatternScreen";
+import QuizScreen from "@/screens/QuizScreen";
+import PatternRevealScreen from "@/screens/PatternRevealScreen";
+import WiringScreen from "@/screens/WiringScreen";
+import DayShapeScreen from "@/screens/DayShapeScreen";
 import LoadingScreen from "@/screens/LoadingScreen";
-import ResultsScreen from "@/screens/ResultsScreen";
-import FollowUpScreen from "@/screens/FollowUpScreen";
-import {
-  callOpenAI,
-  buildSystemPrompt,
-  buildUserMessage,
-  buildFollowUpUserMessage,
-  type ConversationMessage,
-} from "@/lib/openai";
-import { type ParsedResult } from "@/lib/parseResult";
+import ReportScreen from "@/screens/ReportScreen";
+import { generateReset, type WiringChoice, type DayShape, type ResetOutput, type ResetSession } from "@/lib/resetClient";
+import type { PatternId } from "@/content/intake";
+import { BRAND } from "@/components/flow";
 
-type Screen =
-  | "intro"
-  | "pattern"
-  | "followup"
-  | "loading"
-  | "results";
+type Screen = "intro" | "quiz" | "reveal" | "wiring" | "dayshape" | "loading" | "report" | "error";
 
 function App() {
   const [screen, setScreen] = useState<Screen>("intro");
-  const [pattern, setPattern] = useState("");
-  const [answers, setAnswers] = useState<string[]>([]);
-  const [result, setResult] = useState<ParsedResult | null>(null);
+  const [patternId, setPatternId] = useState<PatternId | null>(null);
+  const [topStatements, setTopStatements] = useState<string[]>([]);
+  const [answers, setAnswers] = useState<number[]>([]);
+  const [wiringChoice, setWiringChoice] = useState<WiringChoice | null>(null);
+  const [name, setName] = useState("");
+  const [dayShape, setDayShape] = useState<DayShape | null>(null);
+  const [result, setResult] = useState<ResetOutput | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [conversationHistory, setConversationHistory] = useState<ConversationMessage[]>([]);
-  const [followUpQuestion, setFollowUpQuestion] = useState("");
 
-  const handleStart = () => setScreen("pattern");
-
-  const handlePatternSubmit = async (selectedPattern: string, submittedAnswers: string[]) => {
-    setPattern(selectedPattern);
-    setAnswers(submittedAnswers);
+  const run = async (n: string, day: DayShape) => {
+    if (!patternId || !wiringChoice) return;
     setScreen("loading");
     setError(null);
-    setResult(null);
-    setFollowUpQuestion("");
-
-    const userMsg = buildUserMessage(selectedPattern, submittedAnswers);
-    const systemMsg = buildSystemPrompt();
-
-    const history: ConversationMessage[] = [
-      { role: "system", content: systemMsg },
-      { role: "user", content: userMsg },
-    ];
-
+    const session: ResetSession = { name: n, patternId, topStatements, wiringChoice, dayShape: day };
     try {
-      const response = await callOpenAI("", history);
-      setConversationHistory([...history, { role: "assistant", content: JSON.stringify(response) }]);
-
-      if (response.mode === "follow_up" && response.follow_up_question) {
-        setFollowUpQuestion(response.follow_up_question);
-        setScreen("followup");
-        return;
-      }
-
-      setResult(response);
-      setScreen("results");
+      const out = await generateReset(session);
+      setResult(out);
+      setScreen("report");
     } catch (e) {
-      setError(e instanceof Error ? e.message : "Unknown error");
-      setScreen("results");
+      setError(e instanceof Error ? e.message : "Something went wrong.");
+      setScreen("error");
     }
   };
 
-  const handleFollowUpSubmit = async (followUpAnswer: string) => {
-    setScreen("loading");
-    setError(null);
-
-    const userMsg = buildFollowUpUserMessage(
-      pattern,
-      answers,
-      followUpQuestion,
-      followUpAnswer
-    );
-
-    const systemMsg = buildSystemPrompt(
-      "This is the final pass. Do not ask another follow-up question. Return the final output now."
-    );
-
-    const history: ConversationMessage[] = [
-      { role: "system", content: systemMsg },
-      { role: "user", content: userMsg },
-    ];
-
-    try {
-      const response = await callOpenAI("", history);
-      setConversationHistory([...history, { role: "assistant", content: JSON.stringify(response) }]);
-      setResult(response);
-      setScreen("results");
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "Unknown error");
-      setScreen("results");
-    }
-  };
-
-  const handleAdjust = async (feedback: string) => {
-    if (!result) return;
-    setError(null);
-
-    const adjustHistory: ConversationMessage[] = [
-      ...conversationHistory,
-      {
-        role: "user",
-        content: `Please adjust my reset based on this additional context: ${feedback}`,
-      },
-    ];
-
-    try {
-      const response = await callOpenAI("", adjustHistory);
-      setConversationHistory([...adjustHistory, { role: "assistant", content: JSON.stringify(response) }]);
-      setResult(response);
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "Unknown error");
-    }
-  };
-
-  const handleRetry = () => {
-    setScreen("pattern");
-    setError(null);
-    setResult(null);
-    setFollowUpQuestion("");
+  const restart = () => {
+    setScreen("intro");
+    setPatternId(null); setTopStatements([]); setAnswers([]);
+    setWiringChoice(null); setName(""); setDayShape(null); setResult(null); setError(null);
   };
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#f5efea" }}>
-      {screen === "intro" && <IntroScreen onStart={handleStart} />}
-      {screen === "pattern" && <PatternScreen onSubmit={handlePatternSubmit} />}
-      {screen === "followup" && (
-        <FollowUpScreen
-          question={followUpQuestion}
-          onSubmit={handleFollowUpSubmit}
+    <div className="min-h-screen" style={{ backgroundColor: "#ffffff" }}>
+      {screen === "intro" && <IntroScreen onStart={() => setScreen("quiz")} />}
+
+      {screen === "quiz" && (
+        <QuizScreen
+          onComplete={(a, p, tops) => { setAnswers(a); setPatternId(p); setTopStatements(tops); setScreen("reveal"); }}
         />
       )}
-      {screen === "loading" && <LoadingScreen />}
-      {screen === "results" && (
-        <ResultsScreen
-          result={result}
-          error={error}
-          onRetry={handleRetry}
-          onAdjust={handleAdjust}
+
+      {screen === "reveal" && patternId && (
+        <PatternRevealScreen patternId={patternId} onContinue={() => setScreen("wiring")} />
+      )}
+
+      {screen === "wiring" && (
+        <WiringScreen
+          onComplete={(c) => { setWiringChoice(c); setScreen("dayshape"); }}
+          onBack={() => setScreen("reveal")}
         />
+      )}
+
+      {screen === "dayshape" && (
+        <DayShapeScreen
+          onComplete={(n, day) => { setName(n); setDayShape(day); run(n, day); }}
+          onBack={() => setScreen("wiring")}
+        />
+      )}
+
+      {screen === "loading" && <LoadingScreen />}
+
+      {screen === "report" && result && patternId && wiringChoice && (
+        <ReportScreen result={result} session={{ name, patternId, wiringChoice }} onRestart={restart} />
+      )}
+
+      {screen === "error" && (
+        <div className="min-h-screen flex items-center justify-center px-4 py-16" style={{ background: "#fff" }}>
+          <div className="max-w-lg w-full space-y-6 text-center">
+            <div className="rounded-2xl p-6" style={{ background: BRAND.mist, border: `1px solid ${BRAND.line}` }}>
+              <p className="text-base" style={{ color: BRAND.ink, lineHeight: 1.7 }}>
+                We had trouble creating your reset just now. Please wait a moment and try again. If it keeps happening, contact support@masteringmenopausemethod.com
+              </p>
+              {error && <p className="text-xs mt-3" style={{ color: BRAND.muted }}>Details: {error}</p>}
+            </div>
+            <button
+              onClick={() => dayShape && run(name, dayShape)}
+              className="w-full py-4 px-8 rounded-full text-white font-semibold text-base active:scale-95"
+              style={{ background: BRAND.teal }}
+            >
+              Try again
+            </button>
+            <button onClick={restart} className="text-sm underline" style={{ color: BRAND.muted }}>Start over</button>
+          </div>
+        </div>
       )}
     </div>
   );

@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&display=swap');
 
 @custom-variant dark (&:is(.dark *));
 
@@ -30,29 +31,40 @@
 }
 
 :root {
-  --background: 25 30% 95%;
-  --foreground: 0 0% 18%;
-  --border: 25 15% 90%;
-  --input: 25 15% 90%;
-  --ring: 248 21% 37%;
-  --card: 0 0% 97%;
-  --card-foreground: 0 0% 18%;
-  --primary: 248 21% 37%;
+  --background: 0 0% 100%;
+  --foreground: 240 6% 17%;
+  --border: 36 16% 90%;
+  --input: 36 16% 90%;
+  --ring: 175 74% 33%;
+  --card: 0 0% 100%;
+  --card-foreground: 240 6% 17%;
+  --primary: 175 74% 33%;
   --primary-foreground: 0 0% 100%;
-  --secondary: 25 30% 92%;
-  --secondary-foreground: 0 0% 18%;
-  --muted: 25 20% 90%;
-  --muted-foreground: 0 0% 45%;
-  --accent: 25 30% 92%;
-  --accent-foreground: 0 0% 18%;
-  --destructive: 344 73% 55%;
+  --secondary: 162 53% 92%;
+  --secondary-foreground: 175 74% 20%;
+  --muted: 36 30% 96%;
+  --muted-foreground: 240 4% 45%;
+  --accent: 162 53% 92%;
+  --accent-foreground: 175 74% 20%;
+  --destructive: 9 30% 56%;
   --destructive-foreground: 0 0% 100%;
 
-  --app-font-sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --app-font-sans: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
   --radius: 0.75rem;
 
-  --color-cta: #e63462;
-  --color-heading: #4a476a;
+  --brand-teal: #15938f;
+  --brand-teal-deep: #0f6e56;
+  --brand-rose: #b5706a;
+  --brand-gold: #d99a2b;
+  --brand-ink: #2a2a30;
+  --brand-muted: #6b6a70;
+  --brand-paper: #ffffff;
+  --brand-mist: #eef7f3;
+  --brand-line: #e8e6e2;
+
+  --color-cta: #15938f;
+  --color-heading: #15938f;
 }
 
 @layer base {
@@ -63,6 +75,8 @@
     @apply bg-background text-foreground font-sans antialiased;
   }
 }
+
+.font-display { font-family: var(--font-display); }
 
 @keyframes pulse-gentle {
   0%, 100% { opacity: 1; transform: scale(1); }
@@ -83,54 +97,21 @@
 }
 
 @media print {
-  @page {
-    margin: 0;
-    size: A4;
-  }
-
-  .no-print {
-    display: none !important;
-  }
-
+  @page { margin: 0; size: A4; }
+  .no-print { display: none !important; }
   * {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
-
-  html,
-  body {
-    background-color: hsl(25, 30%, 95%) !important;
+  html, body {
+    background-color: #ffffff !important;
     margin: 0 !important;
     padding: 0 !important;
   }
-
-  body > * {
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-  .min-h-screen {
-    min-height: unset !important;
-    padding: 1.5cm 1.5cm 1.5cm 1.5cm !important;
-  }
-
-  .rounded-2xl {
-    break-inside: avoid !important;
-    page-break-inside: avoid !important;
-  }
-
-  h2, h3 {
-    break-after: avoid !important;
-    page-break-after: avoid !important;
-  }
-
-  h2 + *, h3 + * {
-    break-before: avoid !important;
-    page-break-before: avoid !important;
-  }
-
-  p, li, span {
-    orphans: 3;
-    widows: 3;
-  }
+  body > * { margin: 0 !important; padding: 0 !important; }
+  .min-h-screen { min-height: unset !important; padding: 1.5cm !important; }
+  .rounded-2xl { break-inside: avoid !important; page-break-inside: avoid !important; }
+  h2, h3 { break-after: avoid !important; page-break-after: avoid !important; }
+  h2 + *, h3 + * { break-before: avoid !important; page-break-before: avoid !important; }
+  p, li, span { orphans: 3; widows: 3; }
 }
