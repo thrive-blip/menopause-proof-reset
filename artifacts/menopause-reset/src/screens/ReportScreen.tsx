@@ -8,8 +8,10 @@ import {
   STAGE2_CLOSING_FRAME,
   CLOSING,
 } from "@/content/framing";
+import { useRef } from "react";
 import { wiringForReport, type ResetOutput, type WiringChoice } from "@/lib/resetClient";
 import { BRAND } from "@/components/flow";
+import { downloadPdf } from "@/lib/downloadPdf";
 
 const asset = (name: string) => `${import.meta.env.BASE_URL}${name}`;
 
@@ -54,7 +56,7 @@ function Rule() {
 }
 
 function Section({ children, breakBefore }: { children: React.ReactNode; breakBefore?: boolean }) {
-  return <section className={`rpt-section${breakBefore ? " rpt-break" : ""}`} style={{ marginBottom: 56 }}>{children}</section>;
+  return <section className={`rpt-section pdf-keep${breakBefore ? " rpt-break" : ""}`} style={{ marginBottom: 56 }}>{children}</section>;
 }
 
 function Signature() {
@@ -90,6 +92,7 @@ const printCss = `
 `;
 
 export default function ReportScreen({ result, session, onRestart }: ReportScreenProps) {
+  const docRef = useRef<HTMLDivElement>(null);
   if (result.mode === "scope" || result.mode === "safety") {
     return (
       <div className="min-h-screen flex items-center justify-center px-4 py-16" style={{ background: "#fff" }}>
@@ -113,14 +116,14 @@ export default function ReportScreen({ result, session, onRestart }: ReportScree
   const DownloadBar = ({ top }: { top?: boolean }) => (
     <div className="no-print" style={{ textAlign: "center", margin: top ? "0 0 32px" : "48px 0 0" }}>
       <button
-        onClick={() => window.print()}
+        onClick={() => docRef.current && downloadPdf(docRef.current, `Your Reset - ${session.name}.pdf`)}
         className="py-3.5 px-9 rounded-full text-white font-semibold text-base active:scale-95 transition-all hover:opacity-90"
         style={{ background: BRAND.teal }}
       >
         ↓ Download your reset (PDF)
       </button>
       <p style={{ color: BRAND.muted, fontSize: 13, marginTop: 10 }}>
-        Opens your print dialog. Choose "Save as PDF" to keep it. Your answers are never stored.
+        Saves straight to your device. Your answers are never stored.
       </p>
     </div>
   );
@@ -128,7 +131,7 @@ export default function ReportScreen({ result, session, onRestart }: ReportScree
   return (
     <div style={{ background: "#fff" }} className="min-h-screen">
       <style dangerouslySetInnerHTML={{ __html: printCss }} />
-      <div className="rpt-doc fade-in">
+      <div ref={docRef} className="rpt-doc fade-in">
         <DownloadBar top />
 
         <div className="rpt-cover" style={{ position: "relative", borderRadius: 14, overflow: "hidden", marginBottom: 56, minHeight: 460 }}>
