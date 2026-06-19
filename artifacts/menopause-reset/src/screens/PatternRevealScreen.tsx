@@ -96,9 +96,9 @@ export default function PatternRevealScreen({ patternId, onContinue }: PatternRe
         </div>
       </div>
 
-      <div className="no-print" style={{ marginTop: 36 }}>
+      <div className="no-print" style={{ marginTop: 72 }}>
         <div style={{ marginBottom: 22 }}>
-          <p style={{ color: BRAND.rose, fontWeight: 600, fontSize: 14, letterSpacing: "0.04em", marginBottom: 4 }}>
+          <p style={{ color: BRAND.rose, fontWeight: 700, fontSize: 21, letterSpacing: "0.01em", marginBottom: 6 }}>
             STEP 1 · Download your pattern
           </p>
           <p style={{ color: BRAND.muted, fontSize: 14, lineHeight: 1.6, marginBottom: 12 }}>
@@ -114,7 +114,7 @@ export default function PatternRevealScreen({ patternId, onContinue }: PatternRe
         </div>
 
         <div>
-          <p style={{ color: BRAND.rose, fontWeight: 600, fontSize: 14, letterSpacing: "0.04em", marginBottom: 4 }}>
+          <p style={{ color: BRAND.rose, fontWeight: 700, fontSize: 21, letterSpacing: "0.01em", marginBottom: 6 }}>
             STEP 2 · Build your reset
           </p>
           <p style={{ color: BRAND.muted, fontSize: 14, lineHeight: 1.6, marginBottom: 12 }}>
