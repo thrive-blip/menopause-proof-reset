@@ -72,7 +72,7 @@ function Signature() {
 function Divider({ src, label }: { src: string; label: string }) {
   return (
     <div className="rpt-divider rpt-break" style={{ position: "relative", margin: "0 0 56px", borderRadius: 12, overflow: "hidden" }}>
-      <img src={asset(src)} alt="" style={{ width: "100%", height: 220, objectFit: "cover", display: "block" }} />
+      <img src={asset(src)} alt="" style={{ width: "100%", display: "block" }} />
       <div style={{ position: "absolute", inset: 0, background: "rgba(15,110,86,0.45)" }} />
       <p className="font-display" style={{ position: "absolute", left: 28, bottom: 22, color: "#fff", fontSize: 26, fontWeight: 600 }}>
         {label}
@@ -114,7 +114,7 @@ export default function ReportScreen({ result, session, onRestart }: ReportScree
   const wiring = wiringForReport(session.wiringChoice);
 
   const DownloadBar = ({ top }: { top?: boolean }) => (
-    <div className="no-print" style={{ textAlign: "center", margin: top ? "0 0 32px" : "48px 0 0" }}>
+    <div className="no-print" data-html2canvas-ignore="true" style={{ textAlign: "center", margin: top ? "0 0 32px" : "48px 0 0" }}>
       <button
         onClick={() => docRef.current && downloadPdf(docRef.current, `Your Reset - ${session.name}.pdf`)}
         className="py-3.5 px-9 rounded-full text-white font-semibold text-base active:scale-95 transition-all hover:opacity-90"
@@ -129,9 +129,9 @@ export default function ReportScreen({ result, session, onRestart }: ReportScree
   );
 
   return (
-    <div style={{ background: "#fff" }} className="min-h-screen">
+    <div style={{ background: "#fff" }} className="min-h-screen fade-in">
       <style dangerouslySetInnerHTML={{ __html: printCss }} />
-      <div ref={docRef} className="rpt-doc fade-in">
+      <div ref={docRef} className="rpt-doc">
         <DownloadBar top />
 
         <div className="rpt-cover" style={{ position: "relative", borderRadius: 14, overflow: "hidden", marginBottom: 56, minHeight: 460 }}>
@@ -253,7 +253,7 @@ export default function ReportScreen({ result, session, onRestart }: ReportScree
         <Section breakBefore><Eyebrow>One last thing</Eyebrow><Heading>The closing</Heading><Rule />{paras(CLOSING.replace(/\n\nTalk soon,[\s\S]*$/, ""))}<Signature /></Section>
 
         <DownloadBar />
-        <p className="no-print" style={{ textAlign: "center", marginTop: 18 }}>
+        <p className="no-print" data-html2canvas-ignore="true" style={{ textAlign: "center", marginTop: 18 }}>
           <button onClick={onRestart} style={{ color: BRAND.muted, fontSize: 14, textDecoration: "underline" }}>Start over</button>
         </p>
       </div>

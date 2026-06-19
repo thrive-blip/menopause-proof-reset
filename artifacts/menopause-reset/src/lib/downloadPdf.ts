@@ -7,9 +7,9 @@ export function downloadPdf(el: HTMLElement, filename: string): Promise<void> {
     margin: 12, // mm, all sides
     filename,
     image: { type: "jpeg", quality: 0.98 },
-    html2canvas: { scale: 2, useCORS: true, backgroundColor: "#ffffff" },
+    html2canvas: { scale: 1.6, useCORS: true, backgroundColor: "#ffffff" },
     jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-    pagebreak: { mode: ["css", "legacy"], avoid: [".pdf-keep"] },
+    pagebreak: { mode: ["css", "legacy"], before: [".rpt-break"], avoid: [".pdf-keep"] },
   };
   return html2pdf().set(opt as Record<string, unknown>).from(el).save();
 }
