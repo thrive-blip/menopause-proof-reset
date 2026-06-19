@@ -156,7 +156,37 @@ export default function ReportScreen({ result, session, onRestart }: ReportScree
 
         <Divider src="divider-a.jpg" label="How you're built to work" />
 
-        <Section breakBefore><Eyebrow>This is your pattern</Eyebrow><Heading>{PATTERN_NAME[session.patternId]}</Heading><Rule />{paras(PATTERN_PAGE[session.patternId])}</Section>
+        {(() => {
+          const pp = PATTERN_PAGE[session.patternId];
+          return (
+            <Section breakBefore>
+              <Eyebrow>This is your pattern</Eyebrow>
+              <Heading>{PATTERN_NAME[session.patternId]}</Heading>
+              <p style={{ color: BRAND.rose, fontStyle: "italic", fontSize: 16, marginBottom: 8 }}>{pp.tagline}</p>
+              <Rule />
+              {pp.soundFamiliar.map((stanza, i) => (
+                <div key={i} style={{ marginBottom: 14 }}>
+                  {stanza.map((line, j) => (
+                    <p key={j} style={{ color: BRAND.ink, lineHeight: 1.7, fontSize: 16.5, margin: 0 }}>{line}</p>
+                  ))}
+                </div>
+              ))}
+              <div style={{ background: BRAND.mist, borderLeft: `3px solid ${BRAND.rose}`, borderRadius: "0 8px 8px 0", padding: "14px 18px", fontStyle: "italic", color: BRAND.ink, fontSize: 16.5, margin: "16px 0" }}>{pp.callout}</div>
+              <p style={{ color: BRAND.teal, fontWeight: 600, fontSize: 16, marginBottom: 8 }}>Some women with this pattern also notice:</p>
+              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 16px" }}>
+                {pp.alsoNotice.map((it, i) => (
+                  <li key={i} style={{ display: "flex", gap: 10, marginBottom: 6, color: BRAND.ink, fontSize: 16 }}><span style={{ color: BRAND.rose }}>•</span><span>{it}</span></li>
+                ))}
+              </ul>
+              <p style={{ color: BRAND.teal, fontWeight: 600, fontSize: 16, marginBottom: 8 }}>Why this is hitting harder now</p>
+              <div style={{ background: "#f6f3ec", borderLeft: `3px solid ${BRAND.teal}`, borderRadius: "0 8px 8px 0", padding: "16px 20px" }}>
+                {pp.whyNow.map((para, i) => (
+                  <p key={i} style={{ color: BRAND.ink, lineHeight: 1.7, fontSize: 16, marginBottom: i === pp.whyNow.length - 1 ? 0 : 10 }}>{para}</p>
+                ))}
+              </div>
+            </Section>
+          );
+        })()}
 
         <Section breakBefore><Eyebrow>In your own words</Eyebrow><Heading>What you told me</Heading><Rule />{paras(result.what_you_told_me)}</Section>
 

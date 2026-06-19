@@ -1,38 +1,140 @@
-// "This Is Your Pattern" pages. One of the four prints as the reveal (mid-flow)
-// and again as a page in the full document, chosen by the quiz's winning section.
-// Source of truth: vault MPowered_Reset_Quiz_Pattern_Pages.md
+// "This Is Your Pattern" reveal copy. RESTORED from Adrienne's finalized Netlify
+// quiz (menopause-proof-workday-audit.html result screens) — her approved wording,
+// not the earlier draft reformat. One shows on the reveal, chosen by quiz result.
 import type { PatternId } from "./intake";
 
-export const PATTERN_PAGE: Record<PatternId, string> = {
-  1: `This is the pattern of the woman whose day never lets her land before the next thing is already pulling at her.
+export interface PatternPage {
+  tagline: string;
+  soundFamiliar: string[][]; // stanzas of short lines
+  callout: string;
+  alsoNotice: string[];
+  whyNow: string[];
+}
 
-You start the morning already moving. A message, a call, the thing that just came up, one rolls into the next with no real space between them. You spend the day reacting and putting out fires, and the work you planned barely gets touched. By mid-afternoon you're running low and still going. And when the busy stretch finally breaks, you don't feel relief. You crash.
-
-This is part of how you're built to work. It describes how your days are shaped right now, in a body that has changed the math on what constant pressure costs. The pace used to be survivable. Now it asks for a kind of recovery your day never builds in, and you feel the difference by the afternoon.
-
-The point of this document is not to tell you to slow down, as though you could decide to. Some of the pressure is real and not yours to wave away. The point is to show you where the day is running you with no room to settle, so you can put one real gap back in on purpose, instead of waiting for your body to take it from you.`,
-
-  2: `This is the pattern of the woman whose work never fully switches off, even when the day is technically done.
-
-You check before you're properly awake. You work in pockets through the day. And then, after dinner, you're back on, replying to one more thing, scanning in case you missed something. Even when you're sitting with the people you love, part of you is still half-listening for what might land next. The laptop closes. The work just gets quieter.
-
-This is part of how you're built to work. It describes how your days are shaped right now, in a body that has lost some of its natural off-switch. A flexible schedule with no clear edges doesn't give your body the ending a fixed one does, with its commute or its clock-out. Nothing in your day ever signals that the work is finished.
-
-The point of this document is not to tell you to have more discipline about your phone. The checking is just the symptom of something bigger. The point is to show you where your day has no real ending, so you can give it one on purpose, and let your body finally get the message that it's allowed to stop.`,
-
-  3: `This is the pattern of the woman whose brain is full before the real work has even started.
-
-The day opens and the inbox is already there. Messages, questions, small decisions, they start landing before you're ready for them. You make call after call after call, the little ones and the big ones, all morning. And by early afternoon your brain just stops. Not tired exactly. Done. You sit in front of something that should be simple and nothing comes.
-
-This is part of how you're built to work. It describes how your days are shaped right now, in a body that tips into overload faster than it used to. The same load you always carried is landing sooner and heavier, because your brain has less room to hold all of it at once.
-
-The point of this document is not to tell you to think harder or push through the wall. By the time you hit it, there's nothing left to push with. The point is to show you where your day spends your best thinking before you ever reach the work that matters, so you can put one clear block of it back where it counts.`,
-
-  4: `This is the pattern of the woman who looks the most fine and is working the hardest to seem that way.
-
-You walk into the meeting prepared. You answer the email. You deliver the thing. From the outside, nothing has changed. Underneath, you're spending energy nobody can see to make it look that easy, and the bill for that effort comes due later, when you're alone and finally let the held breath go.
-
-This is part of how you're built to work. It describes how you're moving through your days right now, in a body that has changed the math on what holding it together costs. The effort used to be free. Now it has a price, and you've been paying it where no one can see.
-
-The point of this document is not to tell you to stop holding it together. Some of what you carry, you carry because it matters to you. The point is to show you where the holding is costing more than it's worth, so you can put it down on purpose instead of dropping it when you finally run out.`,
+export const PATTERN_PAGE: Record<PatternId, PatternPage> = {
+  1: {
+    tagline:
+      "Perimenopause and menopause changes how your body responds to pressure. Your workday is still running like it hasn't.",
+    soundFamiliar: [
+      [
+        "Maybe you spend most of your day putting out fires.",
+        "Or you are managing so many things at once that nothing gets your full attention.",
+        "You jump from one thing to the next.",
+        "By the end of the day, you have not touched what you actually planned.",
+      ],
+      ["You are always reacting.", "Always behind."],
+      [
+        "Even when nothing is technically wrong, your body still feels like it is bracing for the next thing.",
+        "Calm has started to feel unfamiliar.",
+        "And when the busy stretch finally ends? You do not feel relief.",
+        "You crash.",
+      ],
+    ],
+    callout: "What you are feeling is real.",
+    alsoNotice: [
+      "An afternoon crash that wipes out the rest of the day",
+      "Finding themselves more reactive than usual, with others or just internally",
+      "That wired-but-exhausted feeling at night",
+      "Waking up already behind",
+    ],
+    whyNow: [
+      "The same pace that may have felt manageable a few years ago is landing differently now.",
+      "Not because you are doing anything wrong. Because your biology is responding differently now.",
+      "In perimenopause and menopause, your nervous system becomes more sensitive to stress. Continuous pressure that once felt normal may now feel like too much.",
+    ],
+  },
+  2: {
+    tagline:
+      "Perimenopause and menopause changes how your body winds down. Your workday is still running like it hasn't.",
+    soundFamiliar: [
+      [
+        "Even when the workday is technically over, part of you is still on.",
+        "Still waiting. Still listening for what might come next.",
+      ],
+      [
+        "Maybe it is the phone.",
+        "Or maybe the phone is just the most visible sign of something bigger.",
+      ],
+      [
+        "Either way, you are checking in before bed and first thing when you wake up.",
+        "A message after hours. A notification as you are trying to wind down.",
+        "Someone reaching out when you are finally off.",
+      ],
+      ["Each one feels small. But your nervous system never fully gets the signal that the day is over."],
+      [
+        "You can be sitting with people you love and still not fully be there.",
+        "Work does not end when you close the laptop. It just gets quieter.",
+      ],
+    ],
+    callout: "What you are feeling is real.",
+    alsoNotice: [
+      "Waking in the night with their mind already running",
+      "Never feeling fully rested",
+      "A low hum of anxiety, even on days off",
+      "Feeling like they are always on call",
+    ],
+    whyNow: [
+      "The same pace that once felt manageable is landing differently now.",
+      "Not because you are doing anything wrong. Because your body needs a clearer signal that the day is over.",
+      "In perimenopause and menopause, as progesterone drops, your nervous system loses some of its natural calming support. Without a true off-switch, your body can stay on alert far longer than it should.",
+    ],
+  },
+  3: {
+    tagline:
+      "Perimenopause and menopause changes how much your brain can carry. Your workday is still running like it hasn't.",
+    soundFamiliar: [
+      [
+        "Before you have done a single real thing, your brain is already full.",
+        "Messages, decisions, tasks. They start before you are ready.",
+      ],
+      ["You make decisions all day. Small ones. Big ones.", "Ones that should not require this much effort."],
+      ["By mid-afternoon, your brain just stops. Not tired. Done."],
+      [
+        "You sit in front of something simple and nothing comes.",
+        "You read the same sentence three times.",
+        "You blank on something you just talked about.",
+      ],
+      ["And then the thought shows up:", "What is wrong with me?"],
+      ["Nothing is wrong with you.", "Your brain is overloaded."],
+    ],
+    callout: "What you are feeling is real.",
+    alsoNotice: [
+      "Brain fog when they need to be sharp",
+      "Gaps where information used to be",
+      "Blanking mid-sentence",
+      "A quiet fear they are losing their edge",
+    ],
+    whyNow: [
+      "The same workload is landing differently now.",
+      "Not because you are less capable. Because the same cognitive load is draining you faster.",
+      "Estrogen helps your brain manage memory and focus. As it shifts in perimenopause and menopause, your brain has less capacity to handle the same load and tips into overload faster than it used to.",
+      "What once felt normal may now exhaust your brain before the real work even begins.",
+    ],
+  },
+  4: {
+    tagline:
+      "Perimenopause and menopause changes how much your body can carry quietly. Your workday is still running like it hasn't.",
+    soundFamiliar: [
+      [
+        "You prepare more than you used to for things that once felt easy.",
+        "You recheck your work. You think twice before committing to things that once felt straightforward.",
+      ],
+      ["Not because you do not care. Because you are not sure you can deliver the way you used to."],
+      ["You hold it together in meetings. You show up. You perform.", "And then you pay for it later."],
+      ["Most people around you have no idea how much effort this now takes."],
+    ],
+    callout: "What you are feeling is real.",
+    alsoNotice: [
+      'Exhaustion after being "on"',
+      "A wave of dread after taking on something new",
+      "Sudden confidence drops",
+      "Feeling unlike themselves professionally",
+    ],
+    whyNow: [
+      "The same expectations are landing differently now.",
+      "Not because you are failing. Because the energy it takes to compensate now costs more.",
+      "In perimenopause and menopause, your nervous system has less capacity to absorb hidden stress. Masking, pushing through, and overpreparing now drain far more energy than they used to.",
+      "And because that effort is invisible, it can be hard to understand why you feel so depleted.",
+    ],
+  },
 };
