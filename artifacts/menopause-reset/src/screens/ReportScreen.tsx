@@ -8,12 +8,16 @@ import {
   STAGE2_CLOSING_FRAME,
   CLOSING,
 } from "@/content/framing";
-import { useRef } from "react";
+import { useRef, type ReactNode } from "react";
 import { wiringForReport, type ResetOutput, type WiringChoice } from "@/lib/resetClient";
 import { BRAND } from "@/components/flow";
 import { downloadPdf } from "@/lib/downloadPdf";
 
 const asset = (name: string) => `${import.meta.env.BASE_URL}${name}`;
+
+// One A4 page is ~1018 CSS px tall at the captured width. Cover + dividers fill a page.
+const PAGE_H = 1010;
+const TEAL_BG = `linear-gradient(160deg, ${BRAND.teal} 0%, ${BRAND.tealDeep} 100%)`;
 
 interface ReportSession {
   name: string;
@@ -35,7 +39,7 @@ function paras(text: string) {
   ));
 }
 
-function Eyebrow({ children }: { children: React.ReactNode }) {
+function Eyebrow({ children }: { children: ReactNode }) {
   return (
     <p style={{ color: BRAND.rose, letterSpacing: "0.18em", textTransform: "uppercase", fontSize: 12, fontWeight: 500, marginBottom: 10 }}>
       {children}
@@ -43,7 +47,7 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
   );
 }
 
-function Heading({ children }: { children: React.ReactNode }) {
+function Heading({ children }: { children: ReactNode }) {
   return (
     <h2 className="font-display" style={{ color: BRAND.teal, fontWeight: 600, fontSize: 30, lineHeight: 1.15, margin: "0 0 6px" }}>
       {children}
@@ -51,12 +55,24 @@ function Heading({ children }: { children: React.ReactNode }) {
   );
 }
 
+function SubLabel({ children, color = BRAND.teal }: { children: ReactNode; color?: string }) {
+  return (
+    <p style={{ color, textTransform: "uppercase", letterSpacing: "0.12em", fontSize: 12.5, fontWeight: 600, margin: "0 0 6px" }}>
+      {children}
+    </p>
+  );
+}
+
 function Rule() {
   return <div style={{ width: 60, height: 3, background: BRAND.gold, borderRadius: 2, margin: "16px 0 22px" }} />;
 }
 
-function Section({ children, breakBefore }: { children: React.ReactNode; breakBefore?: boolean }) {
-  return <section className={`rpt-section pdf-keep${breakBefore ? " rpt-break" : ""}`} style={{ marginBottom: 56 }}>{children}</section>;
+function Section({ children, breakBefore }: { children: ReactNode; breakBefore?: boolean }) {
+  return (
+    <section className={`rpt-section${breakBefore ? " rpt-break" : ""}`} style={{ padding: "48px 44px 56px" }}>
+      {children}
+    </section>
+  );
 }
 
 function Signature() {
@@ -69,25 +85,93 @@ function Signature() {
   );
 }
 
-function Divider({ src, label }: { src: string; label: string }) {
+// Full-page designed cover, teal bleeding to the page edges. No photo.
+function Cover({ name }: { name: string }) {
   return (
-    <div className="rpt-divider rpt-break" style={{ position: "relative", margin: "0 0 56px", borderRadius: 12, overflow: "hidden" }}>
-      <img src={asset(src)} alt="" style={{ width: "100%", display: "block" }} />
-      <div style={{ position: "absolute", inset: 0, background: "rgba(15,110,86,0.45)" }} />
-      <p className="font-display" style={{ position: "absolute", left: 28, bottom: 22, color: "#fff", fontSize: 26, fontWeight: 600 }}>
-        {label}
+    <div
+      className="rpt-cover"
+      style={{
+        minHeight: PAGE_H,
+        background: TEAL_BG,
+        color: "#fff",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        textAlign: "center",
+        padding: "0 56px",
+      }}
+    >
+      <div
+        style={{
+          width: 92,
+          height: 92,
+          borderRadius: 999,
+          border: `2px solid ${BRAND.gold}`,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          marginBottom: 42,
+        }}
+      >
+        <span className="font-display" style={{ fontSize: 44, color: BRAND.gold, fontWeight: 500, lineHeight: 1 }}>M</span>
+      </div>
+      <p style={{ letterSpacing: "0.26em", textTransform: "uppercase", fontSize: 12.5, opacity: 0.85, marginBottom: 30 }}>
+        A Personalized Working Profile
       </p>
+      <h1 className="font-display" style={{ fontSize: 50, fontWeight: 600, lineHeight: 1.1, margin: 0 }}>
+        The Menopause-Proof<br />Workday Reset
+      </h1>
+      <div style={{ width: 70, height: 3, background: BRAND.gold, borderRadius: 2, margin: "34px 0" }} />
+      <p style={{ fontSize: 16, opacity: 0.9, marginBottom: 8 }}>Prepared for</p>
+      <p className="font-display" style={{ fontSize: 32, fontWeight: 500, fontStyle: "italic", margin: 0 }}>{name}</p>
+      <p style={{ fontSize: 13.5, letterSpacing: "0.08em", marginTop: 52, opacity: 0.85 }}>DR. ADRIENNE STEIN, ND</p>
     </div>
   );
 }
 
+// Full-page designed part divider, teal, no photo.
+function PartDivider({ part, title }: { part: string; title: string }) {
+  return (
+    <div
+      className="rpt-section rpt-break"
+      style={{
+        minHeight: PAGE_H,
+        background: TEAL_BG,
+        color: "#fff",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        textAlign: "center",
+        padding: "0 56px",
+      }}
+    >
+      <p style={{ letterSpacing: "0.3em", textTransform: "uppercase", fontSize: 13, color: BRAND.gold, fontWeight: 600, marginBottom: 26 }}>
+        {part}
+      </p>
+      <h2 className="font-display" style={{ fontSize: 44, fontWeight: 600, lineHeight: 1.18, margin: 0 }}>{title}</h2>
+      <div style={{ width: 70, height: 3, background: BRAND.gold, borderRadius: 2, marginTop: 34 }} />
+    </div>
+  );
+}
+
+// Pull the two concrete moves out of an action-rewrite block for the quick-reference chart.
+function movesFromRewrite(ar: string): string[] {
+  const marker = "A couple of things to try:";
+  const idx = ar.indexOf(marker);
+  const rest = idx >= 0 ? ar.slice(idx + marker.length) : ar;
+  return rest
+    .split(/\n-\s+/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+}
+
 const printCss = `
-.rpt-doc { max-width: 720px; margin: 0 auto; padding: 32px 24px 80px; background: #fff; }
+.rpt-doc { max-width: 720px; margin: 0 auto; background: #fff; }
 @media print {
   .rpt-break { break-before: page; page-break-before: always; }
-  .rpt-section { break-inside: avoid; page-break-inside: avoid; }
-  .rpt-cover { break-after: page; page-break-after: always; }
-  .rpt-doc { max-width: none; padding: 0; }
+  .pdf-keep { break-inside: avoid; page-break-inside: avoid; }
 }
 `;
 
@@ -114,7 +198,7 @@ export default function ReportScreen({ result, session, onRestart }: ReportScree
   const wiring = wiringForReport(session.wiringChoice);
 
   const DownloadBar = ({ top }: { top?: boolean }) => (
-    <div className="no-print" data-html2canvas-ignore="true" style={{ textAlign: "center", margin: top ? "0 0 32px" : "48px 0 0" }}>
+    <div className="no-print" data-html2canvas-ignore="true" style={{ textAlign: "center", padding: top ? "32px 24px 0" : "0 24px 40px" }}>
       <button
         onClick={() => docRef.current && downloadPdf(docRef.current, `Your Reset - ${session.name}.pdf`)}
         className="py-3.5 px-9 rounded-full text-white font-semibold text-base active:scale-95 transition-all hover:opacity-90"
@@ -134,30 +218,22 @@ export default function ReportScreen({ result, session, onRestart }: ReportScree
       <div ref={docRef} className="rpt-doc">
         <DownloadBar top />
 
-        <div className="rpt-cover" style={{ position: "relative", borderRadius: 14, overflow: "hidden", marginBottom: 56, minHeight: 460 }}>
-          <img src={asset("cover-photo.jpg")} alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
-          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(15,110,86,0.55), rgba(15,110,86,0.82))" }} />
-          <div style={{ position: "relative", padding: "56px 40px", color: "#fff", minHeight: 460, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-            <div>
-              <p style={{ letterSpacing: "0.2em", textTransform: "uppercase", fontSize: 12.5, opacity: 0.9, marginBottom: 22 }}>
-                A Personalized Working Profile
-              </p>
-              <h1 className="font-display" style={{ fontSize: 42, fontWeight: 600, lineHeight: 1.12, margin: 0 }}>
-                The Menopause-Proof<br />Workday Reset
-              </h1>
-              <div style={{ width: 64, height: 3, background: BRAND.gold, borderRadius: 2, margin: "24px 0" }} />
-              <p style={{ fontSize: 18 }}>Prepared for</p>
-              <p className="font-display" style={{ fontSize: 30, fontWeight: 500, fontStyle: "italic" }}>{session.name}</p>
-            </div>
-            <p style={{ fontSize: 14, letterSpacing: "0.06em" }}>Dr. Adrienne Stein, ND</p>
-          </div>
-        </div>
+        <Cover name={session.name} />
 
-        <Section breakBefore><Eyebrow>A note to you</Eyebrow><Heading>The Letter</Heading><Rule />{paras(renderLetter(session.name).replace(/\n\nTalk soon,[\s\S]*$/, ""))}<Signature /></Section>
+        <Section breakBefore>
+          <Eyebrow>A note to you</Eyebrow>
+          <Heading>The Letter</Heading>
+          <Rule />
+          {paras(renderLetter(session.name).replace(/\n\nTalk soon,[\s\S]*$/, ""))}
+          <Signature />
+        </Section>
 
-        <Section breakBefore><Eyebrow>Before you begin</Eyebrow><Heading>How to use this</Heading><Rule />{paras(HOW_TO_USE)}</Section>
-
-        <Divider src="divider-a.jpg" label="How you're built to work" />
+        <Section breakBefore>
+          <Eyebrow>Before you begin</Eyebrow>
+          <Heading>How to use this document</Heading>
+          <Rule />
+          {paras(HOW_TO_USE)}
+        </Section>
 
         {(() => {
           const pp = PATTERN_PAGE[session.patternId];
@@ -174,7 +250,7 @@ export default function ReportScreen({ result, session, onRestart }: ReportScree
                   ))}
                 </div>
               ))}
-              <div style={{ background: BRAND.mist, borderLeft: `3px solid ${BRAND.rose}`, borderRadius: "0 8px 8px 0", padding: "14px 18px", fontStyle: "italic", color: BRAND.ink, fontSize: 16.5, margin: "16px 0" }}>{pp.callout}</div>
+              <div className="pdf-keep" style={{ background: BRAND.mist, borderLeft: `3px solid ${BRAND.rose}`, borderRadius: "0 8px 8px 0", padding: "14px 18px", fontStyle: "italic", color: BRAND.ink, fontSize: 16.5, margin: "16px 0" }}>{pp.callout}</div>
               <p style={{ color: BRAND.teal, fontWeight: 600, fontSize: 16, marginBottom: 8 }}>Some women with this pattern also notice:</p>
               <ul style={{ listStyle: "none", padding: 0, margin: "0 0 16px" }}>
                 {pp.alsoNotice.map((it, i) => (
@@ -182,7 +258,7 @@ export default function ReportScreen({ result, session, onRestart }: ReportScree
                 ))}
               </ul>
               <p style={{ color: BRAND.teal, fontWeight: 600, fontSize: 16, marginBottom: 8 }}>Why this is hitting harder now</p>
-              <div style={{ background: "#f6f3ec", borderLeft: `3px solid ${BRAND.teal}`, borderRadius: "0 8px 8px 0", padding: "16px 20px" }}>
+              <div className="pdf-keep" style={{ background: BRAND.mist, borderLeft: `3px solid ${BRAND.teal}`, borderRadius: "0 8px 8px 0", padding: "16px 20px" }}>
                 {pp.whyNow.map((para, i) => (
                   <p key={i} style={{ color: BRAND.ink, lineHeight: 1.7, fontSize: 16, marginBottom: i === pp.whyNow.length - 1 ? 0 : 10 }}>{para}</p>
                 ))}
@@ -191,7 +267,14 @@ export default function ReportScreen({ result, session, onRestart }: ReportScree
           );
         })()}
 
-        <Section breakBefore><Eyebrow>In your own words</Eyebrow><Heading>What you told me</Heading><Rule />{paras(result.what_you_told_me)}</Section>
+        <Section breakBefore>
+          <Eyebrow>In your own words</Eyebrow>
+          <Heading>What You Told Me</Heading>
+          <Rule />
+          {paras(result.what_you_told_me)}
+        </Section>
+
+        <PartDivider part="Part One" title="How You're Built to Work" />
 
         {wiring.map(({ section, content }) => {
           const title = WIRING_QUESTIONS.find((w) => w.key === section)?.title ?? "";
@@ -202,7 +285,7 @@ export default function ReportScreen({ result, session, onRestart }: ReportScree
               <p style={{ color: BRAND.rose, fontStyle: "italic", fontSize: 16, marginBottom: 8 }}>{content.tagline}</p>
               <Rule />
               {paras(content.body)}
-              <div style={{ background: BRAND.mist, borderRadius: 12, padding: "18px 22px", marginTop: 18 }}>
+              <div className="pdf-keep" style={{ background: BRAND.mist, borderRadius: 12, padding: "18px 22px", marginTop: 18 }}>
                 <p style={{ color: BRAND.gold, letterSpacing: "0.14em", textTransform: "uppercase", fontSize: 12, fontWeight: 600, marginBottom: 8 }}>Suggestions</p>
                 <p style={{ color: BRAND.ink, lineHeight: 1.7, fontSize: 16 }}>{content.suggestions}</p>
               </div>
@@ -210,19 +293,51 @@ export default function ReportScreen({ result, session, onRestart }: ReportScree
           );
         })}
 
-        <Section breakBefore><Eyebrow>The mismatch</Eyebrow><Heading>Where your friction is coming from</Heading><Rule />{paras(result.where_your_friction_is_coming_from!)}</Section>
+        <Section breakBefore>
+          <Eyebrow>The big picture</Eyebrow>
+          <Heading>Where Your Friction Is Coming From</Heading>
+          <Rule />
+          {paras(result.where_your_friction_is_coming_from!)}
+        </Section>
 
-        <Divider src="divider-b.jpg" label="Your reset" />
+        <PartDivider part="Part Two" title="Your Reset" />
 
         <Section breakBefore>
-          <Eyebrow>What to do tomorrow</Eyebrow><Heading>Your reset, stage one</Heading><Rule />
-          {[["Stop", reset.stop], ["Shift", reset.shift], ["Protect", reset.protect]].map(([label, text]) => (
-            <div key={label} style={{ marginBottom: 16 }}>
-              <p style={{ color: BRAND.teal, textTransform: "uppercase", letterSpacing: "0.1em", fontSize: 12.5, fontWeight: 600, marginBottom: 4 }}>{label}</p>
-              <p style={{ color: BRAND.ink, lineHeight: 1.7, fontSize: 16 }}>{text}</p>
-            </div>
-          ))}
-          <div style={{ background: BRAND.mist, borderRadius: 12, padding: "20px 24px", margin: "20px 0" }}>
+          <Eyebrow>What to do tomorrow</Eyebrow>
+          <Heading>Your Reset</Heading>
+          <Rule />
+
+          <div style={{ marginBottom: 18 }}>
+            <SubLabel>What I'm seeing</SubLabel>
+            <p style={{ color: BRAND.ink, lineHeight: 1.75, fontSize: 16.5 }}>{reset.what_im_seeing}</p>
+          </div>
+
+          <div style={{ marginBottom: 18 }}>
+            <SubLabel>The mismatch</SubLabel>
+            <p style={{ color: BRAND.ink, lineHeight: 1.75, fontSize: 16.5 }}>{reset.the_mismatch}</p>
+          </div>
+
+          <div className="pdf-keep" style={{ marginBottom: 20 }}>
+            <SubLabel>What this is costing you right now</SubLabel>
+            <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+              {reset.what_its_costing.map((c, i) => (
+                <li key={i} style={{ display: "flex", gap: 10, marginBottom: 8, color: BRAND.ink, fontSize: 16, lineHeight: 1.65 }}>
+                  <span style={{ color: BRAND.rose }}>•</span><span>{c}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="pdf-keep" style={{ marginBottom: 4 }}>
+            {[["Stop", reset.stop], ["Shift", reset.shift], ["Protect", reset.protect]].map(([label, text]) => (
+              <div key={label} style={{ marginBottom: 14 }}>
+                <SubLabel>{label}</SubLabel>
+                <p style={{ color: BRAND.ink, lineHeight: 1.7, fontSize: 16 }}>{text}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="pdf-keep" style={{ background: BRAND.mist, borderRadius: 12, padding: "20px 24px", margin: "20px 0" }}>
             <p style={{ color: BRAND.teal, textTransform: "uppercase", letterSpacing: "0.1em", fontSize: 12.5, fontWeight: 600, marginBottom: 12 }}>Three moves for tomorrow</p>
             <ol style={{ margin: 0, paddingLeft: 0, listStyle: "none" }}>
               {reset.three_moves.map((m, i) => (
@@ -233,27 +348,60 @@ export default function ReportScreen({ result, session, onRestart }: ReportScree
               ))}
             </ol>
           </div>
-          <div style={{ marginBottom: 16 }}>
-            <p style={{ color: BRAND.rose, textTransform: "uppercase", letterSpacing: "0.1em", fontSize: 12.5, fontWeight: 600, marginBottom: 4 }}>Start here first</p>
+
+          <div className="pdf-keep" style={{ marginBottom: 16 }}>
+            <SubLabel color={BRAND.rose}>Start here first</SubLabel>
             <p style={{ color: BRAND.ink, lineHeight: 1.7, fontSize: 16, fontWeight: 500 }}>{reset.start_here_first}</p>
           </div>
-          <div>
-            <p style={{ color: BRAND.rose, textTransform: "uppercase", letterSpacing: "0.1em", fontSize: 12.5, fontWeight: 600, marginBottom: 4 }}>What to notice</p>
+          <div className="pdf-keep">
+            <SubLabel color={BRAND.rose}>What to notice</SubLabel>
             <p style={{ color: BRAND.ink, lineHeight: 1.7, fontSize: 16 }}>{reset.what_to_notice}</p>
           </div>
         </Section>
 
         <Section breakBefore>
-          <Eyebrow>The long game</Eyebrow><Heading>{STAGE2_INTRO_TITLE}</Heading><Rule />
+          <Eyebrow>The long game</Eyebrow>
+          <Heading>{STAGE2_INTRO_TITLE}</Heading>
+          <Rule />
           {paras(STAGE2_INTRO)}
           <div style={{ marginTop: 8 }}>{paras(result.where_you_go_from_here!)}</div>
-          <div style={{ marginTop: 8 }}>{paras(STAGE2_CLOSING_FRAME)}</div>
         </Section>
 
-        <Section breakBefore><Eyebrow>One last thing</Eyebrow><Heading>The closing</Heading><Rule />{paras(CLOSING.replace(/\n\nTalk soon,[\s\S]*$/, ""))}<Signature /></Section>
+        <Section breakBefore>
+          <Eyebrow>Your quick-reference for the weeks ahead</Eyebrow>
+          <Heading>Your Seven Shifts, At a Glance</Heading>
+          <Rule />
+          {wiring.map(({ section, content }) => {
+            const title = WIRING_QUESTIONS.find((w) => w.key === section)?.title ?? "";
+            const moves = movesFromRewrite(content.actionRewrite);
+            return (
+              <div key={section} className="pdf-keep" style={{ marginBottom: 24, paddingBottom: 20, borderBottom: `1px solid ${BRAND.line}` }}>
+                <p style={{ color: BRAND.rose, letterSpacing: "0.14em", textTransform: "uppercase", fontSize: 11.5, fontWeight: 600, marginBottom: 4 }}>{title}</p>
+                <p className="font-display" style={{ color: BRAND.teal, fontWeight: 600, fontSize: 21, margin: "0 0 4px" }}>{content.title}</p>
+                <p style={{ color: BRAND.muted, fontStyle: "italic", fontSize: 15, margin: "0 0 10px" }}>{content.tagline}</p>
+                <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+                  {moves.map((m, i) => (
+                    <li key={i} style={{ display: "flex", gap: 10, marginBottom: 7, color: BRAND.ink, fontSize: 15.5, lineHeight: 1.6 }}>
+                      <span style={{ color: BRAND.gold, fontWeight: 700 }}>›</span><span>{m}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
+          <div className="pdf-keep" style={{ marginTop: 8 }}>{paras(STAGE2_CLOSING_FRAME)}</div>
+        </Section>
+
+        <Section breakBefore>
+          <Eyebrow>One last thing</Eyebrow>
+          <Heading>The Closing</Heading>
+          <Rule />
+          {paras(CLOSING.replace(/\n\nTalk soon,[\s\S]*$/, ""))}
+          <Signature />
+        </Section>
 
         <DownloadBar />
-        <p className="no-print" data-html2canvas-ignore="true" style={{ textAlign: "center", marginTop: 18 }}>
+        <p className="no-print" data-html2canvas-ignore="true" style={{ textAlign: "center", paddingBottom: 28 }}>
           <button onClick={onRestart} style={{ color: BRAND.muted, fontSize: 14, textDecoration: "underline" }}>Start over</button>
         </p>
       </div>

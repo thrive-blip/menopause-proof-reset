@@ -32,6 +32,9 @@ export interface DayShape {
 
 // What the server returns (mirrors the api-server ResetOutput).
 export interface ResetStage1 {
+  what_im_seeing: string;
+  the_mismatch: string;
+  what_its_costing: string[];
   stop: string;
   shift: string;
   protect: string;
