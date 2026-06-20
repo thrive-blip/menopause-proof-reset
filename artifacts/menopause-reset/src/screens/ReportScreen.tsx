@@ -200,7 +200,7 @@ export default function ReportScreen({ result, session, onRestart }: ReportScree
   const DownloadBar = ({ top }: { top?: boolean }) => (
     <div className="no-print" data-html2canvas-ignore="true" style={{ textAlign: "center", padding: top ? "32px 24px 0" : "0 24px 40px" }}>
       <button
-        onClick={() => docRef.current && downloadPdf(docRef.current, `Your Reset - ${session.name}.pdf`)}
+        onClick={() => docRef.current && downloadPdf(docRef.current, `Your Reset - ${session.name}.pdf`, 0)}
         className="py-3.5 px-9 rounded-full text-white font-semibold text-base active:scale-95 transition-all hover:opacity-90"
         style={{ background: BRAND.teal }}
       >
