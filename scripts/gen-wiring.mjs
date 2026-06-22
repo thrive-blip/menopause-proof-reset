@@ -119,7 +119,7 @@ function parseStage2() {
       curKey = canon(m[1]);
       continue;
     }
-    if (/^### /.test(line) || /^## /.test(line)) {
+    if (/^### /.test(line) || /^## /.test(line) || /^---\s*$/.test(line)) {
       flush();
       curKey = null;
       continue;
