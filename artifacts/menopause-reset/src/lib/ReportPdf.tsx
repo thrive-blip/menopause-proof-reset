@@ -97,7 +97,7 @@ function Signature() {
     <View wrap={false}>
       <Text style={{ fontSize: 10.5, color: BRAND.ink, marginBottom: 4 }}>Talk soon,</Text>
       <Image style={s.sig} src={asset("signature.png")} />
-      <Text style={s.sigName}>Dr. Adrienne Stein, ND</Text>
+      <Text style={s.sigName}>Dr. Adrienne, ND</Text>
     </View>
   );
 }

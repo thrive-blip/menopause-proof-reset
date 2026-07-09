@@ -114,7 +114,7 @@ function Signature() {
     <div style={{ marginTop: 18 }}>
       <p style={{ color: BRAND.ink, marginBottom: 6 }}>Talk soon,</p>
       <img src={asset("signature.png")} alt="Adrienne" style={{ height: 60, display: "block", marginBottom: 4 }} />
-      <p style={{ color: BRAND.muted, fontSize: 14 }}>Dr. Adrienne Stein, ND</p>
+      <p style={{ color: BRAND.muted, fontSize: 14 }}>Dr. Adrienne, ND</p>
     </div>
   );
 }
