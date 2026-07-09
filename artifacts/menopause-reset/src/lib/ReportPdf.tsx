@@ -38,6 +38,7 @@ const s = StyleSheet.create({
   tagline: { fontFamily: SERIF, color: BRAND.rose, fontSize: 11, fontStyle: "italic", marginBottom: 6 },
   rule: { width: 42, height: 2.5, backgroundColor: BRAND.gold, borderRadius: 2, marginTop: 10, marginBottom: 15 },
   body: { fontSize: 10.5, lineHeight: 1.6, marginBottom: 9, color: BRAND.ink },
+  bodyCompact: { fontSize: 9.5, lineHeight: 1.5, marginBottom: 6, color: BRAND.ink },
   bulletRow: { flexDirection: "row", marginBottom: 4 },
   bulletDot: { color: BRAND.rose, fontSize: 10.5, marginRight: 7 },
   bulletText: { fontSize: 10.5, lineHeight: 1.55, flex: 1, color: BRAND.ink },
@@ -49,7 +50,8 @@ const s = StyleSheet.create({
 });
 
 // Split copy into paragraphs; runs of "- " / "•" lines become a bullet list.
-function Paras({ text }: { text: string }) {
+function Paras({ text, compact }: { text: string; compact?: boolean }) {
+  const bodyStyle = compact ? s.bodyCompact : s.body;
   return (
     <>
       {text.split("\n\n").map((block, i) => {
@@ -76,7 +78,7 @@ function Paras({ text }: { text: string }) {
             run.push(line.replace(/^[-•]\s+/, ""));
           } else {
             flush(`b${i}-${j}`);
-            nodes.push(<Text key={`p${i}-${j}`} style={s.body}>{line}</Text>);
+            nodes.push(<Text key={`p${i}-${j}`} style={bodyStyle}>{line}</Text>);
           }
         });
         flush(`bf${i}`);
@@ -151,7 +153,7 @@ export function ReportPdf({ result, session }: Props) {
       {/* The Letter */}
       <Page size="A4" style={s.page}>
         <SectionHead eyebrow="A note to you" title="The Letter" />
-        <Paras text={renderLetter(session.name).replace(/\n\nTalk soon,[\s\S]*$/, "")} />
+        <Paras text={renderLetter(session.name).replace(/\n\nTalk soon,[\s\S]*$/, "")} compact />
         <Signature />
       </Page>
 
@@ -160,6 +162,8 @@ export function ReportPdf({ result, session }: Props) {
         <SectionHead eyebrow="Before you begin" title="How to use this document" />
         <Paras text={HOW_TO_USE} />
       </Page>
+
+      <TealPage eyebrow="A recap from your quiz" title="Your Workday Pattern" />
 
       {/* Pattern page */}
       <Page size="A4" style={s.page}>
@@ -184,9 +188,10 @@ export function ReportPdf({ result, session }: Props) {
         </View>
       </Page>
 
-      {/* What You Told Me */}
+      <TealPage eyebrow="What you told me" title="In Your Own Words" />
+
+      {/* What You Told Me (divider above serves as the section title) */}
       <Page size="A4" style={s.page}>
-        <SectionHead eyebrow="In your own words" title="What You Told Me" />
         <Paras text={result.what_you_told_me} />
       </Page>
 

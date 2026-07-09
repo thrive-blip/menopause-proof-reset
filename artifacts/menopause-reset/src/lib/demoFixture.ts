@@ -21,18 +21,25 @@ export const DEMO_SESSION: { name: string; patternId: PatternId; wiringChoice: W
 export const DEMO_RESULT: ResetOutput = {
   mode: "final",
   pattern_used: "The Mental Overload Pattern",
-  what_you_told_me: `You told me your brain is full before the day has even really started.
-You told me the decisions pile up all morning, the small ones and the big ones.
-You told me by mid-afternoon there is nothing left, and a simple task can stop you cold.
+  what_you_told_me: `You told me your day starts before it starts, checking messages at 6:30, before the house is even up.
+You told me your mornings are back-to-back client calls, one rolling into the next with no gap to think.
+You told me you save your own real work for after 3pm, and by then there's nothing left to do it with.
+You told me the small decisions pile up all morning, and each one takes more than it should.
 You told me you read the same line three times and still lose it.
-You told me you end the day worn out in a way the work alone does not explain.
+You told me the end of the day is the inbox, and you dread it, worn out in a way the calls alone don't explain.
 
-Read those back to back. They are not five separate problems. They are one. Your day asks your brain to hold and sort more than it can carry at once, so it burns through its fuel by early afternoon, and everything after that costs double.`,
-  where_your_friction_is_coming_from: `You are built to work best in deep, uninterrupted blocks, from something already shaped, deciding in your own time. That is your natural wiring, and it is a real strength when your day lets you use it.
+Read those back to back. They're one shape, not six problems.
 
-Now look at how little of your day fits that. You are handed a hundred small decisions before you have found your feet. Your focus gets chopped into the gaps between messages. And the work that needs a quiet, unbroken stretch keeps getting done in the cracks, which is the one place it cannot get done.
+Your day spends your sharpest hours, the morning, on other people's calls and questions, and saves your own work for the hours when your brain is already empty. The juggling is the fuel that runs out, and you're asking the most of yourself at the exact point you have the least to give.
 
-In perimenopause and menopause, as estrogen shifts, your brain holds a little less at once and tires sooner. So the same load that used to be manageable now tips you into overload faster, and by afternoon there is nothing left to push with.`,
+That's why the afternoon feels like a wall, why simple things stop you cold, why the 5pm inbox lands like a threat. It isn't the amount of work. It's that the work you care about keeps landing in the wrong hours, on a brain that's already spent.`,
+  where_your_friction_is_coming_from: `Put your seven ways of working side by side and one picture appears. You're built to work steadily, on what holds your interest, in deep uninterrupted blocks. You start best from something already shaped, you decide best when you're given time, and under pressure you go still and pull inward. That's a coherent design, and a strong one.
+
+Now hold it against your actual day, which asks for the opposite on nearly every count. Constant switching where you need deep blocks. Snap decisions where you need time. Blank pages where you need something shaped to react to. A pace that never lets your steady engine settle into anything. Any one of these, on its own, you could absorb. They are all happening at once, all day.
+
+That is the friction: seven small mismatches, stacked into one heavy one. Every hour spent working across the grain of how you're built costs more than it should, and right now most of your hours are spent that way.
+
+In perimenopause and menopause, as estrogen shifts, your brain holds a little less at once and your nervous system takes longer to settle. So the strain of running against your own design, the kind you could once absorb without noticing, now surfaces as the afternoon wall, the fog, and the wired-but-empty end of the day.`,
   reset_stage_1: {
     what_im_seeing: `Your morning is where your sharpest thinking lives, and right now it is being spent on everyone else's small decisions before you reach anything of your own. By the time you get to the work that matters, the fuel is gone.`,
     the_mismatch: `You are built for deep, unbroken focus, but your day is built out of interruptions. Every switch back and forth costs you more than it used to, and the bill comes due by mid-afternoon.`,
