@@ -190,8 +190,9 @@ export function ReportPdf({ result, session }: Props) {
 
       <TealPage eyebrow="What you told me" title="In Your Own Words" />
 
-      {/* What You Told Me (divider above serves as the section title) */}
+      {/* What You Told Me */}
       <Page size="A4" style={s.page}>
+        <SectionHead eyebrow="What you told me" title="In Your Own Words" />
         <Paras text={result.what_you_told_me} />
       </Page>
 
@@ -248,6 +249,8 @@ export function ReportPdf({ result, session }: Props) {
         <Paras text={STAGE2_INTRO} />
         <Paras text={result.where_you_go_from_here!} />
       </Page>
+
+      <TealPage eyebrow="Quick reference" title="Your Seven Shifts, At a Glance" />
 
       {/* Seven Shifts */}
       <Page size="A4" style={s.page}>

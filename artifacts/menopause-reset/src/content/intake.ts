@@ -207,7 +207,7 @@ export const WIRING_QUESTIONS: WiringQuestion[] = [
     options: [
       { letter: "A", archetype: "Sponge", label: "I pick up other people's stress. I take on the tension around me without realizing it's not mine.", tap: "Sponge (absorbs other people's stress as her own)" },
       { letter: "B", archetype: "Rusher", label: "I speed up. I rush and treat everything as urgent, like it all has to be done right now.", tap: "Rusher (speeds up under stress, treats everything as urgent)" },
-      { letter: "C", archetype: "Freezer", label: "I freeze. I go quiet and still, and the stress settles into my body.", tap: "Freezer (goes still and quiet under stress; it lodges in the body)" },
+      { letter: "C", archetype: "Freeze", label: "I freeze. I go quiet and still, and the stress settles into my body.", tap: "The Freeze (goes still and quiet under stress; it lodges in the body)" },
     ],
   },
 ];

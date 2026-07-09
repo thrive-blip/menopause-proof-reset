@@ -14,7 +14,7 @@ export const DEMO_SESSION: { name: string; patternId: PatternId; wiringChoice: W
     offTrack: "Frustration",
     processing: "Deep Diver",
     emotions: "Wave Rider",
-    stress: "Freezer",
+    stress: "Freeze",
   },
 };
 

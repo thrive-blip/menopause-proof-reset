@@ -30,7 +30,7 @@ const CANON = {
   holder: "Holder",
   sponge: "Sponge",
   rusher: "Rusher",
-  freezer: "Freezer",
+  freeze: "Freeze",
 };
 
 function canon(raw) {
