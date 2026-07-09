@@ -8,9 +8,11 @@ import {
   STAGE2_CLOSING_FRAME,
   CLOSING,
 } from "@/content/framing";
-import { useRef, type ReactNode } from "react";
+import { useRef, useState, type ReactNode } from "react";
 import { wiringForReport, type ResetOutput, type WiringChoice } from "@/lib/resetClient";
 import { BRAND } from "@/components/flow";
+import { pdf } from "@react-pdf/renderer";
+import { ReportPdf } from "@/lib/ReportPdf";
 
 const asset = (name: string) => `${import.meta.env.BASE_URL}${name}`;
 
@@ -236,18 +238,40 @@ export default function ReportScreen({ result, session, onRestart }: ReportScree
 
   const reset = result.reset_stage_1!;
   const wiring = wiringForReport(session.wiringChoice);
+  const [saving, setSaving] = useState(false);
+
+  const savePdf = async () => {
+    setSaving(true);
+    try {
+      const blob = await pdf(<ReportPdf result={result} session={session} />).toBlob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `Your Reset - ${session.name}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 2000);
+    } catch (e) {
+      console.error("PDF generation failed", e);
+      alert("Sorry, the PDF could not be generated just now. Please try again.");
+    } finally {
+      setSaving(false);
+    }
+  };
 
   const DownloadBar = ({ top }: { top?: boolean }) => (
     <div className="no-print" data-html2canvas-ignore="true" style={{ textAlign: "center", padding: top ? "32px 24px 0" : "0 24px 40px" }}>
       <button
-        onClick={() => { document.title = `Your Reset - ${session.name}`; window.print(); }}
+        onClick={savePdf}
+        disabled={saving}
         className="py-3.5 px-9 rounded-full text-white font-semibold text-base active:scale-95 transition-all hover:opacity-90"
-        style={{ background: BRAND.teal }}
+        style={{ background: BRAND.teal, opacity: saving ? 0.7 : 1 }}
       >
-        ↓ Save your reset (PDF)
+        {saving ? "Preparing your PDF…" : "↓ Download your reset (PDF)"}
       </button>
       <p style={{ color: BRAND.muted, fontSize: 13, marginTop: 10 }}>
-        Opens your print view — choose "Save as PDF" as the destination. Your answers are never stored.
+        Saves straight to your device. Your answers are never stored.
       </p>
     </div>
   );
