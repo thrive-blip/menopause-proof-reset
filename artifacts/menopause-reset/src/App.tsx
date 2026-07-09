@@ -9,10 +9,13 @@ import ReportScreen from "@/screens/ReportScreen";
 import { generateReset, type WiringChoice, type DayShape, type ResetOutput, type ResetSession } from "@/lib/resetClient";
 import type { PatternId } from "@/content/intake";
 import { BRAND } from "@/components/flow";
+import { DEMO_RESULT, DEMO_SESSION } from "@/lib/demoFixture";
 
 type Screen = "intro" | "quiz" | "reveal" | "wiring" | "dayshape" | "loading" | "report" | "error";
 
 function App() {
+  // Keyless layout/PDF QA: /?demo renders a full sample report with no quiz or API call.
+  const isDemo = typeof window !== "undefined" && new URLSearchParams(window.location.search).has("demo");
   const [screen, setScreen] = useState<Screen>("intro");
   const [patternId, setPatternId] = useState<PatternId | null>(null);
   const [topStatements, setTopStatements] = useState<string[]>([]);
@@ -43,6 +46,10 @@ function App() {
     setPatternId(null); setTopStatements([]); setAnswers([]);
     setWiringChoice(null); setName(""); setDayShape(null); setResult(null); setError(null);
   };
+
+  if (isDemo) {
+    return <ReportScreen result={DEMO_RESULT} session={DEMO_SESSION} onRestart={() => { window.location.href = window.location.pathname; }} />;
+  }
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: "#ffffff" }}>
