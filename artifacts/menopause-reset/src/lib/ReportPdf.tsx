@@ -25,14 +25,18 @@ import { BRAND } from "@/components/flow";
 
 const asset = (name: string) => `${import.meta.env.BASE_URL}${name}`;
 
+// @react-pdf v4's built-in Helvetica renders BLANK glyphs in this build (proven:
+// a Times line renders, an identical Helvetica line does not), so every "sans"
+// role points at Times as well. The doc is all-serif until we register a real
+// sans (Inter) from a bundled static .ttf. Do NOT set any of these to Helvetica.
 const SERIF = "Times-Roman";
 const SERIF_B = "Times-Bold";
-const SANS = "Helvetica";
-const SANS_B = "Helvetica-Bold";
+const SANS = "Times-Roman";
+const SANS_B = "Times-Bold";
 
 const s = StyleSheet.create({
   page: { paddingTop: 54, paddingBottom: 54, paddingHorizontal: 46, backgroundColor: "#fff", fontFamily: SANS, color: BRAND.ink },
-  teal: { backgroundColor: BRAND.teal, color: "#fff", alignItems: "center", justifyContent: "center", padding: 56 },
+  teal: { backgroundColor: BRAND.teal, color: "#fff", fontFamily: SERIF, alignItems: "center", justifyContent: "center", padding: 56 },
   eyebrow: { fontFamily: SANS, color: BRAND.rose, fontSize: 8, letterSpacing: 1.6, textTransform: "uppercase", marginBottom: 7 },
   heading: { fontFamily: SERIF_B, color: BRAND.teal, fontSize: 21, marginBottom: 4 },
   tagline: { fontFamily: SERIF, color: BRAND.rose, fontSize: 11, fontStyle: "italic", marginBottom: 6 },
