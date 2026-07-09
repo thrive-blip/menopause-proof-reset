@@ -33,7 +33,7 @@ interface ReportScreenProps {
 
 function paras(text: string) {
   return text.split("\n\n").map((p, i) => (
-    <p key={i} style={{ color: BRAND.ink, lineHeight: 1.75, marginBottom: 14, fontSize: 16.5 }}>
+    <p key={i} className="pdf-keep" style={{ color: BRAND.ink, lineHeight: 1.75, marginBottom: 14, fontSize: 16.5 }}>
       {p}
     </p>
   ));
@@ -244,15 +244,15 @@ export default function ReportScreen({ result, session, onRestart }: ReportScree
               <p style={{ color: BRAND.rose, fontStyle: "italic", fontSize: 16, marginBottom: 8 }}>{pp.tagline}</p>
               <Rule />
               {pp.soundFamiliar.map((stanza, i) => (
-                <div key={i} style={{ marginBottom: 14 }}>
+                <div key={i} className="pdf-keep" style={{ marginBottom: 14 }}>
                   {stanza.map((line, j) => (
                     <p key={j} style={{ color: BRAND.ink, lineHeight: 1.7, fontSize: 16.5, margin: 0 }}>{line}</p>
                   ))}
                 </div>
               ))}
               <div className="pdf-keep" style={{ background: BRAND.mist, borderLeft: `3px solid ${BRAND.rose}`, borderRadius: "0 8px 8px 0", padding: "14px 18px", fontStyle: "italic", color: BRAND.ink, fontSize: 16.5, margin: "16px 0" }}>{pp.callout}</div>
-              <p style={{ color: BRAND.teal, fontWeight: 600, fontSize: 16, marginBottom: 8 }}>Some women with this pattern also notice:</p>
-              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 16px" }}>
+              <p className="pdf-keep" style={{ color: BRAND.teal, fontWeight: 600, fontSize: 16, marginBottom: 8 }}>Some women with this pattern also notice:</p>
+              <ul className="pdf-keep" style={{ listStyle: "none", padding: 0, margin: "0 0 16px" }}>
                 {pp.alsoNotice.map((it, i) => (
                   <li key={i} style={{ display: "flex", gap: 10, marginBottom: 6, color: BRAND.ink, fontSize: 16 }}><span style={{ color: BRAND.rose }}>•</span><span>{it}</span></li>
                 ))}
@@ -307,12 +307,12 @@ export default function ReportScreen({ result, session, onRestart }: ReportScree
           <Heading>Your Reset</Heading>
           <Rule />
 
-          <div style={{ marginBottom: 18 }}>
+          <div className="pdf-keep" style={{ marginBottom: 18 }}>
             <SubLabel>What I'm seeing</SubLabel>
             <p style={{ color: BRAND.ink, lineHeight: 1.75, fontSize: 16.5 }}>{reset.what_im_seeing}</p>
           </div>
 
-          <div style={{ marginBottom: 18 }}>
+          <div className="pdf-keep" style={{ marginBottom: 18 }}>
             <SubLabel>The mismatch</SubLabel>
             <p style={{ color: BRAND.ink, lineHeight: 1.75, fontSize: 16.5 }}>{reset.the_mismatch}</p>
           </div>
