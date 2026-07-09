@@ -8,6 +8,7 @@ import {
   Text,
   Image,
   StyleSheet,
+  Font,
 } from "@react-pdf/renderer";
 import { type ReactElement } from "react";
 import { PATTERN_NAME, WIRING_QUESTIONS, type PatternId } from "@/content/intake";
@@ -25,18 +26,22 @@ import { BRAND } from "@/components/flow";
 
 const asset = (name: string) => `${import.meta.env.BASE_URL}${name}`;
 
-// @react-pdf v4's built-in Helvetica renders BLANK glyphs in this build (proven:
-// a Times line renders, an identical Helvetica line does not), so every "sans"
-// role points at Times as well. The doc is all-serif until we register a real
-// sans (Inter) from a bundled static .ttf. Do NOT set any of these to Helvetica.
+// Body + labels use Inter (Adrienne's brand sans), registered from the bundled
+// variable TTF in public/ — this is the spacious, open look. Do NOT use the
+// built-in Helvetica: it renders BLANK glyphs in @react-pdf v4 (proven). Bold is a
+// second family off the same file. Headings stay in the built-in serif (Times).
+Font.register({ family: "Inter", fonts: [{ src: asset("InterVariable.ttf"), fontWeight: 400 }] });
+Font.register({ family: "InterBold", fonts: [{ src: asset("InterVariable.ttf"), fontWeight: 700 }] });
+Font.registerHyphenationCallback((word) => [word]); // keep whole words; no line-end hyphenation
+
 const SERIF = "Times-Roman";
 const SERIF_B = "Times-Bold";
-const SANS = "Times-Roman";
-const SANS_B = "Times-Bold";
+const SANS = "Inter";
+const SANS_B = "InterBold";
 
 const s = StyleSheet.create({
   page: { paddingTop: 54, paddingBottom: 54, paddingHorizontal: 46, backgroundColor: "#fff", fontFamily: SANS, color: BRAND.ink },
-  teal: { backgroundColor: BRAND.teal, color: "#fff", fontFamily: SERIF, alignItems: "center", justifyContent: "center", padding: 56 },
+  teal: { backgroundColor: BRAND.teal, color: "#fff", fontFamily: SANS, alignItems: "center", justifyContent: "center", padding: 56 },
   eyebrow: { fontFamily: SANS, color: BRAND.rose, fontSize: 8, letterSpacing: 1.6, textTransform: "uppercase", marginBottom: 7 },
   heading: { fontFamily: SERIF_B, color: BRAND.teal, fontSize: 21, marginBottom: 4 },
   tagline: { fontFamily: SERIF, color: BRAND.rose, fontSize: 11, fontStyle: "italic", marginBottom: 6 },
