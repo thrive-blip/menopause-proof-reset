@@ -11,7 +11,6 @@ import {
 import { useRef, type ReactNode } from "react";
 import { wiringForReport, type ResetOutput, type WiringChoice } from "@/lib/resetClient";
 import { BRAND } from "@/components/flow";
-import { downloadPdf } from "@/lib/downloadPdf";
 
 const asset = (name: string) => `${import.meta.env.BASE_URL}${name}`;
 
@@ -167,7 +166,7 @@ function Cover({ name }: { name: string }) {
 function PartDivider({ part, title }: { part: string; title: string }) {
   return (
     <div
-      className="rpt-section rpt-break"
+      className="rpt-section rpt-break rpt-divider"
       style={{
         minHeight: PAGE_H,
         background: TEAL_BG,
@@ -203,8 +202,16 @@ function movesFromRewrite(ar: string): string[] {
 const printCss = `
 .rpt-doc { max-width: 720px; margin: 0 auto; background: #fff; }
 @media print {
+  @page { size: A4; margin: 0; }
+  html, body { margin: 0 !important; padding: 0 !important; background: #fff !important; }
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  .no-print { display: none !important; }
+  .rpt-doc { max-width: none !important; width: 100% !important; margin: 0 !important; }
   .rpt-break { break-before: page; page-break-before: always; }
   .pdf-keep { break-inside: avoid; page-break-inside: avoid; }
+  /* full-bleed teal pages fill the sheet edge to edge */
+  .rpt-cover, .rpt-divider { min-height: 100vh !important; break-inside: avoid; }
+  .rpt-cover { break-after: page; }
 }
 `;
 
@@ -233,14 +240,14 @@ export default function ReportScreen({ result, session, onRestart }: ReportScree
   const DownloadBar = ({ top }: { top?: boolean }) => (
     <div className="no-print" data-html2canvas-ignore="true" style={{ textAlign: "center", padding: top ? "32px 24px 0" : "0 24px 40px" }}>
       <button
-        onClick={() => docRef.current && downloadPdf(docRef.current, `Your Reset - ${session.name}.pdf`, 0)}
+        onClick={() => { document.title = `Your Reset - ${session.name}`; window.print(); }}
         className="py-3.5 px-9 rounded-full text-white font-semibold text-base active:scale-95 transition-all hover:opacity-90"
         style={{ background: BRAND.teal }}
       >
-        ↓ Download your reset (PDF)
+        ↓ Save your reset (PDF)
       </button>
       <p style={{ color: BRAND.muted, fontSize: 13, marginTop: 10 }}>
-        Saves straight to your device. Your answers are never stored.
+        Opens your print view — choose "Save as PDF" as the destination. Your answers are never stored.
       </p>
     </div>
   );
