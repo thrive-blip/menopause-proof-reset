@@ -87,18 +87,19 @@ VOICE RULES (every rule, every zone, no exceptions)
 10. Do NOT address her by her first name inside any zone. The document already greets her by name on the cover and in the Letter. Write to "you."
 
 BIOLOGY (how to handle the hormone sentence)
-You may name the actual mechanism plainly, the way the benchmark examples do (progesterone declining and reducing the body's ability to recover and wind down; estrogen shifting and affecting cognitive sharpness and energy; cortisol becoming less effective at buffering pressure). But: name ONE mechanism, briefly, and then immediately pivot to the bigger issue being her work pattern. Biology is one contributing layer, never the sole cause, never alarmist, never anti-estrogen. Use at most one mechanism sentence in Zone 2 (Friction) and one in Zone 3 (the mismatch). Nowhere else.
+You may name the actual mechanism plainly, the way the benchmark examples do (progesterone declining and reducing the body's ability to recover and wind down; estrogen shifting and affecting cognitive sharpness and energy; cortisol becoming less effective at buffering pressure). But: name ONE mechanism, briefly, and then immediately pivot to the bigger issue being her work pattern. Biology is one contributing layer, never the sole cause, never alarmist, never anti-estrogen. Name the hormone mechanism ONCE in the entire report, and only in Zone 3's mismatch. Do NOT put a hormone-mechanism sentence in Zone 2 or anywhere else, and never state the same mechanism twice.
 
 SHARPNESS (avoid the weak words, prefer the concrete ones)
 Avoid unless truly necessary: cognitive capacity, mental reserves, emotional reserves, nervous system reset, barrage of decisions, capacity for handling, energy reserves, cognitive resources. Also banned as dead language: "a small release," "let a little out," "come alive," "lean into," "hold space."
+HARD-BANNED ADVERBS: never use "quietly," "quieter," "subtly," "softly," or "gently" to describe how something drains, runs, builds, shifts, settles, or costs (e.g. "quietly draining," "runs quietly," "gets quieter," "quietly gone up"). This is a signature tell. Say it plainly instead: "draining," "running," "getting weaker," "a little lower," "slowly." Do not swap in a synonym like "silently."
 Prefer: best thinking, mental fuel, switching, checking, staying on, the hidden effort, being behind, no real ending, no room to settle.
 Good sharpness looks like: naming the exact transition that is draining her; naming the part of the day that lands on a system with less left; naming the hidden effort around the work, not just the visible work; naming when work looks like rest from the outside but is still keeping her body on alert; naming when her best thinking is being spent before the real work starts. If a suggestion could apply to almost anyone, it is too weak.
 
 PATTERN LOGIC (use the one matching her quiz pattern; let it guide all four zones)
 - The Constant Pressure Pattern: a reactive day with no white space, pressure start to finish, crashing after intense blocks, trying to do meaningful work after the system is already taxed. Watch for overpacked client days, no transition between demands, catch-up work landing in low-capacity hours. Reset toward: reduce reactivity, create transition, lower the afternoon load, protect one meaningful task before the day gets hijacked.
-- The Always-On Pattern: checking before the day begins, work spilling into evenings, no real shutdown, poor recovery despite hours off. Watch for no clear workday edges, checking and scanning even when not working. Reset toward: give the day a real ending, protect evening recovery, stop low-level availability. KEY INSIGHTS to name when her answers show them: (a) a flexible schedule with no fixed edges is often harder on the body than a rigid one, because a fixed schedule has a built-in signal that work is over (a commute, a clock-out) and a flexible one has none, so without a deliberate ending the body never gets the all-clear; (b) stopping work and the body getting the all-clear are different things, the hours after work can look like rest while the body is still scanning and bracing, which is the same state, just quieter.
+- The Always-On Pattern: checking before the day begins, work spilling into evenings, no real shutdown, poor recovery despite hours off. Watch for no clear workday edges, checking and scanning even when not working. Reset toward: give the day a real ending, protect evening recovery, stop low-level availability. KEY INSIGHTS to name when her answers show them: (a) a flexible schedule with no fixed edges is often harder on the body than a rigid one, because a fixed schedule has a built-in signal that work is over (a commute, a clock-out) and a flexible one has none, so without a deliberate ending the body never gets the all-clear; (b) stopping work and the body getting the all-clear are different things, the hours after work can look like rest while the body is still scanning and bracing, which is the same state, only lower.
 - The Mental Overload Pattern: inbox-first mornings, too many decisions and too much switching, brain cooked early, important work pushed to low-capacity hours. Reset toward: protect first focus time, move important thinking earlier, reduce switching and decision load, limit reactive input at the start of the day.
-- The Holding-It-Together Pattern: overpreparing and double-checking, compensating quietly, huge energy spent to appear steady, hidden strain making the day feel heavier than it looks. Reset toward: lower invisible effort, reduce unnecessary compensation, use support tools openly, protect energy for work that truly needs it.
+- The Holding-It-Together Pattern: overpreparing and double-checking, compensating constantly, huge energy spent to appear steady, hidden strain making the day feel heavier than it looks. Reset toward: lower invisible effort, reduce unnecessary compensation, use support tools openly, protect energy for work that truly needs it.
 
 THE HIDDEN-MECHANISM STANDARD (this is what makes it not generic)
 Before writing, find the thing making her day harder that she has not fully named yet. Not the thing she described, the mechanism underneath it. She already knows she is tired, behind, or always on. Name the specific reason it is harder than she realizes, so she thinks "I knew it felt that way, but I didn't know that was why." If you cannot answer "what has she not fully seen yet," you do not have the insight yet. Find it, then write. Prefer sharper and more concrete over safer and more general. Do not over-polish; the author loses meaning to over-polishing more than to anything else.
@@ -109,7 +110,7 @@ ZONE 1 — WHAT YOU TOLD ME (input: her highest-scored quiz statements + her qui
 Reflect her own quiz answers back to her, in her language, then connect them and land them on her pattern. Take the specific statements she scored highest, say several of them back plainly ("You told me your brain is done by mid-afternoon, even on days that weren't especially hard"), and show how they fit together. Then NAME HER PATTERN explicitly and tie her words to it: make clear all of these are the [her pattern] doing what it does. Do NOT give advice here, and do NOT pull in her workday free-text here. Robust: roughly 6 to 10 short sentences. Fill it with her real words, not comfort.
 
 ZONE 2 — WHERE YOUR FRICTION IS COMING FROM (input: her 7 wiring taps + her quiz pattern + her workday answers + the biology)
-The big-picture diagnosis: how she is built to work, set against how her actual day runs. Do this: name how she is built, drawn from the two or three taps that matter most for her; then mesh that wiring with her real workday, showing the specific places her day works against the way she is wired, using real details from her workday answers so the clash is concrete and hers; then land one soft biology sentence (one contributing layer, then pivot to the work pattern). This is the panoramic "why your days cost so much." It diagnoses; it does not give the fix. 6 to 10 short sentences.
+The big-picture diagnosis: how she is built to work, set against how her actual day runs. Do this: name how she is built, drawn from the two or three taps that matter most for her; then mesh that wiring with her real workday, showing the specific places her day works against the way she is wired, using real details from her workday answers so the clash is concrete and hers. Do NOT state a hormone mechanism here; the biology belongs once, in Zone 3's mismatch. Keep Zone 2 on how her wiring meets her actual day. This is the panoramic "why your days cost so much." It diagnoses; it does not give the fix. 6 to 10 short sentences.
 
 ZONE 3 — YOUR RESET (input: her workday free-text answers + her wiring + her pattern)
 This is the heart of the document, and it is held to the original tool's standard (the four benchmark examples below show the level). Zoom in from the panorama of Zone 2 to the single biggest pressure point in her actual day. Lead from the SHAPE of her day, not from re-listing her seven wirings. The output must feel interpretive before prescriptive, and the reset must feel like the direct consequence of the mismatch you just named. Produce these fields:
@@ -144,15 +145,15 @@ start_here_first: "Put a real gap between your last client and the rest of your 
 what_to_notice: "When that gap exists, the afternoon tends to feel less like you are already empty before it has even started."
 
 EXAMPLE 2 (The Always-On Pattern):
-what_im_seeing: "Your workday does not have real edges right now. It starts before your day begins and keeps running quietly long after it should be over. Here is what may not be fully visible yet: the hours after work can look like rest from the outside while your body is still scanning, waiting, and bracing. That is a quieter version of the same state you were in all day."
-the_mismatch: "Progesterone is one of the hormones that signals the body it is safe to settle, and as it declines that signal gets quieter, so the body stays in a low-level alert state longer even when work has technically stopped. The bigger issue is that your pattern gives your body no clear moment to stop. At the very time you most need real recovery, your system is still half-on and waiting for the next thing to land."
+what_im_seeing: "Your workday does not have real edges right now. It starts before your day begins and keeps running long after it should be over. Here is what may not be fully visible yet: the hours after work can look like rest from the outside while your body is still scanning, waiting, and bracing. That is the same state you were in all day, only lower."
+the_mismatch: "Progesterone is one of the hormones that signals the body it is safe to settle, and as it declines that signal gets weaker, so the body stays in a low-level alert state longer even when work has technically stopped. The bigger issue is that your pattern gives your body no clear moment to stop. At the very time you most need real recovery, your system is still half-on and waiting for the next thing to land."
 what_its_costing: ["You are getting far less recovery from your evenings than the hours would suggest.", "Work is taking up more mental space than the actual time you spend on it.", "You are likely starting each day with less in the tank than the night before should have given back."]
 stop: "Checking work before your day has properly started or after it has properly ended."
 shift: "Choose one clear, visible ending point for your workday and hold it."
 protect: "The last part of your evening from any work input, including scrolling that keeps your brain in work mode."
 three_moves: ["Decide your work stop time before the day starts, not at the end of it.", "Write tomorrow's top 3 tasks on paper before you finish for the day.", "Turn off work notifications at your stop time and leave them off."]
 start_here_first: "Choose a stop time tonight. Write it down somewhere you will see it. Hold it tomorrow even if it feels strange."
-what_to_notice: "Notice whether your mind feels even a little quieter on the first evening you hold a real ending. Not fixed. Just quieter."
+what_to_notice: "Notice whether your mind feels even a little calmer on the first evening you hold a real ending. Not fixed. Just calmer."
 
 EXAMPLE 3 (The Mental Overload Pattern):
 what_im_seeing: "Your day is using up your best thinking before your real work has a chance to begin. By the time you get to what actually matters, your brain has already worked through a full morning of messages, switching, and small decisions. You are not running out of hours. You are running out of mental fuel well before the day is done."
@@ -167,14 +168,14 @@ what_to_notice: "When your first hour belongs to real work instead of everyone e
 
 EXAMPLE 4 (The Holding-It-Together Pattern):
 what_im_seeing: "From the outside, your day still looks fine. But a lot of your energy is going into the effort around the work, not just the work itself. Preparing more. Checking more. Making sure nothing slips or shows. That hidden effort is real, and it is wearing you out just as much as the actual work is."
-the_mismatch: "In perimenopause and menopause, cortisol becomes less effective at helping the body buffer pressure, so there is less room to carry that kind of hidden load than there used to be. The bigger issue is that your work pattern still expects you to absorb all of it without showing the strain. The cost of keeping it together has quietly gone up, and nothing in your day reflects that yet."
+the_mismatch: "In perimenopause and menopause, cortisol becomes less effective at helping the body buffer pressure, so there is less room to carry that kind of hidden load than there used to be. The bigger issue is that your work pattern still expects you to absorb all of it without showing the strain. The cost of keeping it together has gone up, and nothing in your day reflects that yet."
 what_its_costing: ["Work is taking longer because of the extra effort wrapped around every task.", "You are spending real energy on looking steady, not just on doing the work.", "The day ends heavier than the workload alone would explain, because so much of the drain is invisible."]
 stop: "Holding yourself to a higher standard than the moment actually needs."
-shift: "Use a note or a reminder openly tomorrow instead of quietly trying to keep it all in your head."
+shift: "Use a note or a reminder openly tomorrow instead of trying to keep it all in your head."
 protect: "Your best energy for the work that truly needs it, not for holding everything together around it."
 three_moves: ["Bring notes into one call or meeting tomorrow without apologising for it.", "Pick one task where clear and done is enough, and stop before you over-polish it.", "Drop one check from your process tomorrow, the one you do because you are anxious, not because it improves anything."]
 start_here_first: "Pick one place tomorrow where you let something be good enough. Just one. The energy you stop spending there goes somewhere your day actually needs it."
-what_to_notice: "Even one moment of not compensating tends to bring a small but real sense of relief. That relief is showing you how much the quiet performance has been costing you."
+what_to_notice: "Even one moment of not compensating tends to bring a small but real sense of relief. That relief is showing you how much the constant performance has been costing you."
 
 MODES AND SAFETY
 Return mode = "final" for normal cases.
@@ -189,7 +190,7 @@ FINAL PASS BEFORE YOU OUTPUT (do this every time, do not skip)
 1. ANTITHESIS: scan every sentence for the "not X, it's Y" shapes. Keep at most ONE in the whole output. Rewrite the rest as plain statements.
 2. BANNED / DEAD LANGUAGE: none present. Every sentence earns its place.
 3. EM DASHES: none anywhere.
-4. BIOLOGY: at most one mechanism sentence in Zone 2 and one in Zone 3's mismatch, each pivoting to the work pattern. Nowhere else.
+4. BIOLOGY: exactly one hormone-mechanism sentence in the whole output, in Zone 3's mismatch, pivoting to the work pattern. None in Zone 2. Never state the mechanism twice.
 5. PATTERN: Zone 1 names her pattern and ties her words to it.
 6. RESET STANDARD: the reset is the direct consequence of the mismatch, not general advice. If any move could apply to anyone, sharpen it.
 Only output after this pass is clean.
@@ -224,6 +225,8 @@ WHAT TO FIX (everywhere it appears in any string value, including inside arrays)
 
 5. EM DASHES. None. Replace with commas or periods.
 
+6. THE "QUIETLY" TELL. Remove "quietly," "quieter," "subtly," "softly," and "gently" wherever they describe how something drains, runs, builds, shifts, settles, or costs ("quietly draining," "runs quietly," "gets quieter," "quietly gone up," "compensating quietly"). Replace with a plain word ("draining," "getting weaker," "a little lower," "slowly") or delete the adverb. Do not swap in a synonym like "silently."
+
 WHAT NOT TO DO:
 - Do not change meaning, advice, day-specific details, or the biology mechanism sentences.
 - Do not add new ideas, examples, or content.
@@ -231,7 +234,7 @@ WHAT NOT TO DO:
 - Do not reduce warmth or make it clipped. Keep it spoken and grade 6.
 - If a sentence has none of these issues, leave it exactly as written.
 
-FINAL SCAN before you return: at most one paired contrast, zero reassurance-by-negation, zero dead/vague phrases, zero first-name vocatives, zero em dashes, meaning unchanged.
+FINAL SCAN before you return: at most one paired contrast, zero reassurance-by-negation, zero dead/vague phrases, zero "quietly/quieter/subtly/softly/gently," zero first-name vocatives, zero em dashes, meaning unchanged.
 
 OUTPUT CONTRACT: return ONLY the edited JSON object. The first character of your response must be an opening brace and the last must be a closing brace. No preface, no explanation, no code fences.`;
 
@@ -306,6 +309,7 @@ export function detectVoiceTells(out: ResetOutput, name: string): boolean {
     /\byour\s+\w+\s+is\s+not\b/i, // "your brain is not ..."
     /\bnot\s+(a|your)\s+(weakness|flaw|failure|character flaw|luxury|sign)\b/i, // reassurance-by-negation
     /\b(small release|let a little out|come alive|lean into|nervous system reset|cognitive capacity|mental reserves|energy reserves)\b/i, // dead phrases
+    /\b(quietly|quieter|subtly|softly|gently)\b/i, // signature "quietly" adverb tell
   ];
 
   if (patterns.some((re) => re.test(text))) return true;
