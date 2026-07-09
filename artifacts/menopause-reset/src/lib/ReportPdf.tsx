@@ -97,6 +97,20 @@ function Paras({ text, compact }: { text: string; compact?: boolean }) {
   );
 }
 
+// "In Your Own Words" is meant to read as a spacious, scannable list — one
+// reflected statement per line — then a synthesis paragraph. The engine sometimes
+// runs the statements together in one block, so put each sentence of the FIRST
+// block on its own line; later blocks (the synthesis) stay as prose.
+function airyStatements(text: string): string {
+  const blocks = text.split(/\n\n+/);
+  if (!blocks.length) return text;
+  blocks[0] = blocks[0]
+    .replace(/\s*\n\s*/g, " ")             // collapse any single newlines to spaces
+    .replace(/([.!?])\s+(?=[A-Z"'])/g, "$1\n") // one statement per line
+    .trim();
+  return blocks.join("\n\n");
+}
+
 function Signature() {
   return (
     <View wrap={false}>
@@ -202,7 +216,7 @@ export function ReportPdf({ result, session }: Props) {
       {/* What You Told Me */}
       <Page size="A4" style={s.page}>
         <SectionHead eyebrow="What you told me" title="In Your Own Words" />
-        <Paras text={result.what_you_told_me} />
+        <Paras text={airyStatements(result.what_you_told_me)} />
       </Page>
 
       <TealPage eyebrow="Part One" title="How You're Built to Work" />
