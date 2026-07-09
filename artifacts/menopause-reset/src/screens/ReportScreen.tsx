@@ -31,12 +31,45 @@ interface ReportScreenProps {
   onRestart: () => void;
 }
 
+// Render copy into paragraphs, turning runs of "- " / "•" lines into a real
+// stacked bullet list (html2pdf renders a plain <p> as one run-on line otherwise).
+const isBullet = (l: string) => /^[-•]\s+/.test(l.trim());
+
 function paras(text: string) {
-  return text.split("\n\n").map((p, i) => (
-    <p key={i} className="pdf-keep" style={{ color: BRAND.ink, lineHeight: 1.75, marginBottom: 14, fontSize: 16.5 }}>
-      {p}
-    </p>
-  ));
+  return text.split("\n\n").map((block, i) => {
+    const lines = block.split("\n").map((l) => l.trim()).filter(Boolean);
+    const nodes: ReactNode[] = [];
+    let run: string[] = [];
+    const flush = () => {
+      if (!run.length) return;
+      const items = run;
+      run = [];
+      nodes.push(
+        <ul key={`u${nodes.length}`} className="pdf-keep" style={{ listStyle: "none", padding: 0, margin: "4px 0 14px" }}>
+          {items.map((b, j) => (
+            <li key={j} style={{ display: "flex", gap: 10, marginBottom: 6, color: BRAND.ink, lineHeight: 1.7, fontSize: 16.5 }}>
+              <span style={{ color: BRAND.rose, flexShrink: 0 }}>•</span>
+              <span>{b}</span>
+            </li>
+          ))}
+        </ul>,
+      );
+    };
+    lines.forEach((line) => {
+      if (isBullet(line)) {
+        run.push(line.replace(/^[-•]\s+/, ""));
+      } else {
+        flush();
+        nodes.push(
+          <p key={`p${nodes.length}`} className="pdf-keep" style={{ color: BRAND.ink, lineHeight: 1.75, marginBottom: 14, fontSize: 16.5 }}>
+            {line}
+          </p>,
+        );
+      }
+    });
+    flush();
+    return <div key={i}>{nodes}</div>;
+  });
 }
 
 function Eyebrow({ children }: { children: ReactNode }) {
@@ -304,7 +337,7 @@ export default function ReportScreen({ result, session, onRestart }: ReportScree
 
         <Section breakBefore>
           <Eyebrow>What to do tomorrow</Eyebrow>
-          <Heading>Your Reset</Heading>
+          <Heading>Your Reset · Step One</Heading>
           <Rule />
 
           <div className="pdf-keep" style={{ marginBottom: 18 }}>
@@ -360,7 +393,7 @@ export default function ReportScreen({ result, session, onRestart }: ReportScree
         </Section>
 
         <Section breakBefore>
-          <Eyebrow>The long game</Eyebrow>
+          <Eyebrow>The coming weeks</Eyebrow>
           <Heading>{STAGE2_INTRO_TITLE}</Heading>
           <Rule />
           {paras(STAGE2_INTRO)}
