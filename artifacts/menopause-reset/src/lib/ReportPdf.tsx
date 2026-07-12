@@ -44,13 +44,16 @@ const s = StyleSheet.create({
   teal: { backgroundColor: BRAND.teal, color: "#fff", fontFamily: SANS, alignItems: "center", justifyContent: "center", padding: 56 },
   eyebrow: { fontFamily: SANS, color: BRAND.rose, fontSize: 8, letterSpacing: 1.6, textTransform: "uppercase", marginBottom: 7 },
   heading: { fontFamily: SERIF_B, color: BRAND.teal, fontSize: 21, marginBottom: 4 },
-  tagline: { fontFamily: SERIF, color: BRAND.rose, fontSize: 11, fontStyle: "italic", marginBottom: 6 },
-  rule: { width: 42, height: 2.5, backgroundColor: BRAND.gold, borderRadius: 2, marginTop: 10, marginBottom: 15 },
-  body: { fontSize: 10.5, lineHeight: 1.6, marginBottom: 9, color: BRAND.ink },
+  tagline: { fontFamily: SERIF, color: BRAND.rose, fontSize: 12, fontStyle: "italic", marginBottom: 6 },
+  rule: { width: 42, height: 2.5, backgroundColor: BRAND.gold, borderRadius: 2, marginTop: 10, marginBottom: 18 },
+  // Big, spacious body — each section gets its own Page, so a long one simply
+  // flows onto a second page and the next section still starts clean at the top.
+  // The Letter keeps its own smaller "compact" size and is left as-is.
+  body: { fontSize: 12, lineHeight: 1.72, marginBottom: 12, color: BRAND.ink },
   bodyCompact: { fontSize: 9.5, lineHeight: 1.5, marginBottom: 6, color: BRAND.ink },
-  bulletRow: { flexDirection: "row", marginBottom: 4 },
-  bulletDot: { color: BRAND.rose, fontSize: 10.5, marginRight: 7 },
-  bulletText: { fontSize: 10.5, lineHeight: 1.55, flex: 1, color: BRAND.ink },
+  bulletRow: { flexDirection: "row", marginBottom: 7 },
+  bulletDot: { color: BRAND.rose, fontSize: 12, marginRight: 8 },
+  bulletText: { fontSize: 12, lineHeight: 1.7, flex: 1, color: BRAND.ink },
   subLabel: { fontFamily: SANS_B, color: BRAND.teal, fontSize: 8.5, letterSpacing: 0.8, textTransform: "uppercase", marginBottom: 5 },
   box: { backgroundColor: BRAND.mist, borderRadius: 8, padding: 14, marginTop: 10, marginBottom: 6 },
   boxLabel: { fontFamily: SANS_B, color: BRAND.gold, fontSize: 8, letterSpacing: 1, textTransform: "uppercase", marginBottom: 6 },
@@ -203,11 +206,11 @@ export function ReportPdf({ result, session }: Props) {
         </View>
         <Text style={{ fontFamily: SANS_B, color: BRAND.teal, fontSize: 10.5, marginTop: 6, marginBottom: 6 }}>Some women with this pattern also notice:</Text>
         {pp.alsoNotice.map((it, i) => (
-          <View key={i} style={s.bulletRow}><Text style={s.bulletDot}>•</Text><Text style={s.bulletText}>{it}</Text></View>
+          <View key={i} style={[s.bulletRow, { marginBottom: 3 }]}><Text style={[s.bulletDot, { fontSize: 10.5 }]}>•</Text><Text style={[s.bulletText, { fontSize: 10.5, lineHeight: 1.45 }]}>{it}</Text></View>
         ))}
         <Text style={{ fontFamily: SANS_B, color: BRAND.teal, fontSize: 10.5, marginTop: 12, marginBottom: 6 }}>Why this is hitting harder now</Text>
-        <View style={[s.box, { borderLeftWidth: 2.5, borderLeftColor: BRAND.teal }]}>
-          {pp.whyNow.map((para, i) => (<Text key={i} style={[s.body, { marginBottom: 6 }]}>{para}</Text>))}
+        <View style={[s.box, { borderLeftWidth: 2.5, borderLeftColor: BRAND.teal }]} wrap={false}>
+          {pp.whyNow.map((para, i) => (<Text key={i} style={[s.bodyCompact, { marginBottom: 6 }]}>{para}</Text>))}
         </View>
       </Page>
 
@@ -226,7 +229,7 @@ export function ReportPdf({ result, session }: Props) {
         <Page key={section} size="A4" style={s.page}>
           <SectionHead eyebrow={wTitle(section)} title={content.title} tagline={content.tagline} />
           <Paras text={content.body} />
-          <View style={s.box}>
+          <View style={s.box} wrap={false}>
             <Text style={s.boxLabel}>Suggestions</Text>
             <Text style={[s.body, { marginBottom: 0 }]}>{content.suggestions}</Text>
           </View>
