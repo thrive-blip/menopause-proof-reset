@@ -113,7 +113,7 @@ export const PATTERN_PAGE: Record<PatternId, PatternPage> = {
   },
   4: {
     tagline:
-      "Perimenopause and menopause changes how much your body can carry quietly. Your workday is still running like it hasn't.",
+      "Perimenopause and menopause changes how much your body can carry. Your workday is still running like it hasn't.",
     soundFamiliar: [
       [
         "You prepare more than you used to for things that once felt easy.",
