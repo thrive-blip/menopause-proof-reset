@@ -16,7 +16,7 @@ export default function IntroScreen({ onStart }: IntroScreenProps) {
             Why your workday suddenly feels so much harder
           </h1>
           <p className="text-base md:text-lg" style={{ color: BRAND.ink, lineHeight: 1.7 }}>
-            A short set of questions, then a few about how you actually work. In about five minutes you will have a clear picture of the pattern behind your days, and a personalized reset you can start tomorrow.
+            A short quiz to find your pattern, then a few about your actual workday. In about five minutes, you'll see what's really costing you, plus a personalized reset to start tomorrow.
           </p>
           <p className="text-sm" style={{ color: BRAND.muted }}>
             Made for women in business navigating perimenopause and menopause.
