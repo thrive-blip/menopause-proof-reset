@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { rateLimit } from "express-rate-limit";
 import Anthropic from "@anthropic-ai/sdk";
 import {
   GENERATION_SYSTEM_PROMPT,
@@ -49,7 +50,20 @@ async function callModel(
     .join("");
 }
 
-router.post("/reset", async (req, res) => {
+// This route fires 1-2 Claude API calls per request and is publicly
+// reachable, so it needs a per-IP cap independent of the $37 checkout -
+// otherwise scripted abuse can run up the Anthropic bill or exhaust
+// capacity for real customers. 5 per hour comfortably covers someone
+// retrying after a mistake or sharing a connection with a colleague.
+const resetLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000,
+  limit: 5,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: "Too many requests. Please try again in a while." },
+});
+
+router.post("/reset", resetLimiter, async (req, res) => {
   try {
     const input = req.body;
 
