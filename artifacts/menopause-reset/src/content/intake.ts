@@ -226,19 +226,22 @@ export const DAY_SHAPE_QUESTIONS: DayShapeQuestion[] = [
     key: "role",
     prompt: "What do you do?",
     helper: "Your role or title, and the kind of work it is.",
-    placeholder: "For example, an independent consultant, a counsellor, the head of an HR team.",
+    placeholder:
+      "I'm an HR director and manage a team of 12 inside a mid-size company.\nI'm a coach and run two online programs and a membership, plus about five 1:1 clients a week.",
   },
   {
     key: "workday",
     prompt: "What does your workday look like?",
     helper:
       "Start from when your day begins. Give as much detail as you can about how your days normally flow, what sort of responsibilities you have, and how your day ends.",
-    placeholder: "Walk me through a normal day, start to finish.",
+    placeholder:
+      "My day starts around 7am. I'm checking emails before the house is awake, then getting my kids ready and off to school. I'm back online between 9 and 12, usually filled with back-to-back meetings.\n\nAfternoons are supposed to be for strategy work, but I'm usually putting out fires that came up in the morning meetings, bouncing between that, answering emails, and trying to get a few tasks done on the bigger projects I was supposed to be working on.\n\nWhen the kids get home I'm meant to be done by 5, so that's when I switch to dinner and family time. But Slack keeps coming in, so I'm often answering messages until 6 or 7, and sometimes still clearing emails as late as 9pm.",
   },
   {
     key: "hardest",
     prompt: "What's the hardest part of your day, and what's happening then?",
     helper: "The moment it feels heaviest, and what you're doing when it hits.",
-    placeholder: "Tell me about the hardest stretch.",
+    placeholder:
+      "Around 2pm, right after lunch, when I've got a proposal to write and no bandwidth left. My brain goes foggy, I reread the same paragraph five times, and I end up doing something low-stakes instead just to feel like I'm making progress.",
   },
 ];
